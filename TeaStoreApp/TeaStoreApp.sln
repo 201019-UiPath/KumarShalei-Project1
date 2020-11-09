@@ -1,15 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeaDB", "TeaDB\TeaDB.csproj", "{D2782F82-17EE-42D1-936A-76D962A7A49F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeaDB", "TeaDB\TeaDB.csproj", "{D2782F82-17EE-42D1-936A-76D962A7A49F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeaLib", "TeaLib\TeaLib.csproj", "{18733D0D-8E91-4091-8406-CA21CA40E11D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeaLib", "TeaLib\TeaLib.csproj", "{18733D0D-8E91-4091-8406-CA21CA40E11D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeaUI", "TeaUI\TeaUI.csproj", "{BA7ADFAF-0FE9-44C4-855F-DB6FCD5723D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeaUI", "TeaUI\TeaUI.csproj", "{BA7ADFAF-0FE9-44C4-855F-DB6FCD5723D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeaTest", "TeaTest\TeaTest.csproj", "{A8053176-DD69-4B36-BB87-3292E623397F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeaTest", "TeaTest\TeaTest.csproj", "{A8053176-DD69-4B36-BB87-3292E623397F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeaAPI", "TeaAPI\TeaAPI.csproj", "{62B9DFA6-593D-4EEA-93EC-CAD6CC22130D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,22 +22,7 @@ Global
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{980FC3D8-5ADD-4BA6-8CA9-9A2680E6D712}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{980FC3D8-5ADD-4BA6-8CA9-9A2680E6D712}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{980FC3D8-5ADD-4BA6-8CA9-9A2680E6D712}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{980FC3D8-5ADD-4BA6-8CA9-9A2680E6D712}.Debug|x64.Build.0 = Debug|Any CPU
-		{980FC3D8-5ADD-4BA6-8CA9-9A2680E6D712}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{980FC3D8-5ADD-4BA6-8CA9-9A2680E6D712}.Debug|x86.Build.0 = Debug|Any CPU
-		{980FC3D8-5ADD-4BA6-8CA9-9A2680E6D712}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{980FC3D8-5ADD-4BA6-8CA9-9A2680E6D712}.Release|Any CPU.Build.0 = Release|Any CPU
-		{980FC3D8-5ADD-4BA6-8CA9-9A2680E6D712}.Release|x64.ActiveCfg = Release|Any CPU
-		{980FC3D8-5ADD-4BA6-8CA9-9A2680E6D712}.Release|x64.Build.0 = Release|Any CPU
-		{980FC3D8-5ADD-4BA6-8CA9-9A2680E6D712}.Release|x86.ActiveCfg = Release|Any CPU
-		{980FC3D8-5ADD-4BA6-8CA9-9A2680E6D712}.Release|x86.Build.0 = Release|Any CPU
 		{D2782F82-17EE-42D1-936A-76D962A7A49F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D2782F82-17EE-42D1-936A-76D962A7A49F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2782F82-17EE-42D1-936A-76D962A7A49F}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -84,5 +71,23 @@ Global
 		{A8053176-DD69-4B36-BB87-3292E623397F}.Release|x64.Build.0 = Release|Any CPU
 		{A8053176-DD69-4B36-BB87-3292E623397F}.Release|x86.ActiveCfg = Release|Any CPU
 		{A8053176-DD69-4B36-BB87-3292E623397F}.Release|x86.Build.0 = Release|Any CPU
+		{62B9DFA6-593D-4EEA-93EC-CAD6CC22130D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62B9DFA6-593D-4EEA-93EC-CAD6CC22130D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62B9DFA6-593D-4EEA-93EC-CAD6CC22130D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{62B9DFA6-593D-4EEA-93EC-CAD6CC22130D}.Debug|x64.Build.0 = Debug|Any CPU
+		{62B9DFA6-593D-4EEA-93EC-CAD6CC22130D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{62B9DFA6-593D-4EEA-93EC-CAD6CC22130D}.Debug|x86.Build.0 = Debug|Any CPU
+		{62B9DFA6-593D-4EEA-93EC-CAD6CC22130D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62B9DFA6-593D-4EEA-93EC-CAD6CC22130D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62B9DFA6-593D-4EEA-93EC-CAD6CC22130D}.Release|x64.ActiveCfg = Release|Any CPU
+		{62B9DFA6-593D-4EEA-93EC-CAD6CC22130D}.Release|x64.Build.0 = Release|Any CPU
+		{62B9DFA6-593D-4EEA-93EC-CAD6CC22130D}.Release|x86.ActiveCfg = Release|Any CPU
+		{62B9DFA6-593D-4EEA-93EC-CAD6CC22130D}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {42B6108C-2CEE-497D-85D0-ACB00BDD4D5C}
 	EndGlobalSection
 EndGlobal
