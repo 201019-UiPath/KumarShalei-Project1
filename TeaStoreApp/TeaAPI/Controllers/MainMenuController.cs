@@ -3,14 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using TeaDB;
+using TeaLib;
 
 namespace TeaAPI.Controllers
 {
+    [ApiController]
+    [Route("[Controller]")]
+    
     public class MainMenuController : Controller
     {
-        public IActionResult Index()
+        private readonly MainMenuService mainMenuService;
+
+        public MainMenuController()
         {
-            return View();
+            this.mainMenuService = new MainMenuService(); 
+        }
+
+        [HttpGet("get/{email}")]
+        [Produces("application/json")]
+        public IActionResult GetCustomerInfo(string email)
+        {
+            try
+            {
+                return Ok(mainMenuService.GetCustomerInfo(email));
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
         }
     }
 }

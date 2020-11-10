@@ -14,6 +14,8 @@ using Microsoft.EntityFrameworkCore;
 using TeaDB;
 using TeaDB.Entities;
 using TeaLib;
+using TeaDB.IRepo;
+using TeaDB.IMappers;
 
 namespace TeaAPI
 {
@@ -31,7 +33,10 @@ namespace TeaAPI
         {
             services.AddControllers().AddXmlSerializerFormatters();
             services.AddDbContext<TeaContext>(options => options.UseNpgsql(Configuration.GetConnectionString("TeaDB")));
-
+            
+            services.AddScoped<MainMenuService, MainMenuService>();
+            services.AddScoped<IMainMenuRepo, DBRepo>();
+            services.AddScoped<IMapper, DBMapper>();
 
         }
 
