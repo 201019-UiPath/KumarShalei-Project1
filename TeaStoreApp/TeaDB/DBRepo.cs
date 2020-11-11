@@ -5,13 +5,14 @@ using TeaDB.IMappers;
 using TeaDB.IRepo;
 using System.Linq;
 using System;
+using Microsoft.EntityFrameworkCore;
 
 namespace TeaDB
 {
     /// <summary>
     /// Data Access Logic
     /// </summary>
-    public class DBRepo : IMainMenuRepo, IManagerRepo, ILocationRepo, IOrderRepo
+    public class DBRepo : IMainMenuRepo, IManagerRepo, ILocationRepo, IBasketRepo
 
     {
         public  TeaContext context {get;set;}
@@ -21,10 +22,7 @@ namespace TeaDB
             this.mapper = new DBMapper();
         }
 
-
-
-
-        public void NewCustomerAsync(CustomerModel customer)
+        public void NewCustomer(CustomerModel customer)
         {
             context.Customers.Add(mapper.ParseCustomer(customer));
             context.SaveChanges();
@@ -32,246 +30,139 @@ namespace TeaDB
 
         public CustomerModel GetCustomerInfo(string email)
         {
-            try{
-                return mapper.ParseCustomer(
-                    context.Customers
-                    .First(c => c.Customeremail == email)
-                );
-            }
-            catch(InvalidOperationException){
-                System.Console.WriteLine("No account with that email was found");
-            }
-            return null;
+            return mapper.ParseCustomer(
+                context.Customers
+                .First(c => c.Customeremail == email)
+            );
         }
 
-        public List<OrderModel> GetOrderHistory(CustomerModel customer)
+        public void ReplenishStock(InventoryModel inventory, int amount)
         {
-            try{
-                return mapper.ParseOrder(
-                    context.Orders
-                    .Where(c => c.Customerid == customer.id && c.Payed == true)
-                    .ToList()
-                );
-            }
-            catch (System.InvalidOperationException){
-                return null;
-            }
+            context.Inventory.First(i => i.Locationid == inventory.locationId && i.Productid == inventory.productId).Stock += amount;
+            context.SaveChanges();
         }
 
-        public List<OrderModel> GetOrderHistoryByMostExpensive(CustomerModel customer){
-        
-            try{
-                return mapper.ParseOrder(
-                    context.Orders
-                    .Where(c => c.Customerid == customer.id && c.Payed == true)
-                    .OrderByDescending(c => c.Totalprice)
-                    .ToList()
-                );
-            }
-            catch (System.InvalidOperationException){
-                return null;
-            }
+        public List<OrderModel> GetOrderHistoryLocationByMostExpensive(int locationid)
+        {
+            return mapper.ParseOrder(
+                   context.Orders
+                   .Where(o => o.Locationid == locationid && o.Payed == true)
+                   .Include("Orderitems")
+                   .OrderByDescending(o => o.Totalprice)
+                   .ToList()
+            );
         }
 
-
-        public List<OrderModel> GetOrderHistoryByLeastExpensive(CustomerModel customer){
-            try{
-                return mapper.ParseOrder(
-                    context.Orders
-                    .Where(c => c.Customerid == customer.id && c.Payed == true)
-                    .OrderBy(c => c.Totalprice)
-                    .ToList()
-                );
-            }
-            catch (System.InvalidOperationException){
-                return null;
-            }
-        }
-
-        public List<OrderItemModel> GetOrderItems(int orderid){
-            return mapper.ParseOrderItem(
-                context.Orderitems
-                .Where(o => o.Orderid == orderid)
+        public List<OrderModel> GetOrderHistoryLocationByLeastExpensive(int locationid)
+        {
+            return mapper.ParseOrder(
+                context.Orders
+                .Where(o => o.Locationid == locationid && o.Payed == true)
+                .Include("Orderitems")
+                .OrderBy(o => o.Totalprice)
                 .ToList()
             );
         }
 
-       
-            
-
-        public void ReplenishStock(int locationid, int productid, int amount)
+        public List<OrderModel> GetLocationOrderHistory(int id)
         {
-            
-            context.Inventory.First(i => i.Locationid == locationid && i.Productid==productid).Stock += amount;
-           
-            context.SaveChanges();           
+            return mapper.ParseOrder(
+                context.Orders
+                .Where(o => o.Locationid == id && o.Payed == true)
+                .Include("Orderitems")
+                .OrderByDescending(c => c.Totalprice)
+                .ToList()
+            );
         }
 
+        public void CreateNewProduct(ProductModel product)
+        {
+            context.Products.Add(mapper.ParseProduct(product));
+            context.SaveChanges();
+        }
 
+        public void AddItemToInventory(InventoryModel inventory)
+        {
+            context.Inventory.Add(mapper.ParseInventory(inventory));
+            context.SaveChanges();
+        }
 
-
-
-        public LocationModel GetLocation(int id){
+        public LocationModel GetLocationInventory(int id)
+        {
             return mapper.ParseLocation(
                 context.Locations
+                .Include("Inventory")
+                .Include("Orders")
                 .First(l => l.Locationid == id)
             );
         }
 
-        public List<OrderModel> GetLocationOrderHistory(int x)
+        
+        
+
+        public ProductModel GetProduct(int id)
         {
-            return mapper.ParseOrder(
-                context.Orders
-                .Where(i => i.Locationid == x)
-                .ToList()
+            return mapper.ParseProduct(
+                context.Products
+                .First(p => p.Productid == id)
             );
         }
 
-
-        public List<InventoryModel> GetLocationInventory(int x)
+        public void CreateNewBasket(OrderModel order)
         {
-            return mapper.ParseInventory(
-                context.Inventory
-                .Where(i => i.Locationid == x)
-                .OrderBy(i => i.Productid)
-                .ToList()
-            );
-        }
-
-
-
-
-
-
-
-        public void NewOrder(OrderModel order)
-        {
-            
             context.Orders.Add(mapper.ParseOrder(order));
             context.SaveChanges();
         }
 
-        public OrderModel GetCurrentOrder(int customerid, int locationid){
+        public OrderModel GetCurrentOrder(int customerId, int locationId)
+        {
             return mapper.ParseOrder(
                 context.Orders
-                .First(o => o.Customerid == customerid && o.Locationid == locationid)
+                .Include("Orderitems")
+                .First(o => o.Customerid == customerId && o.Locationid == locationId)
             );
         }
 
-        public void DecreaseStock(int locationid, int productid, int stock){
-            
-            var inventory = context.Inventory.First(i => i.Locationid == locationid && i.Productid == productid);
-            inventory.Stock = inventory.Stock -stock;
-            context.SaveChanges();
-        }
-
-        
-        public void AddProductToOrderItem(OrderItemModel order)
+        public void AddToBasket(OrderItemModel order)
         {
             context.Orderitems.Add(mapper.ParseOrderItem(order));
             context.SaveChanges();
         }
 
-        public void DeleteProductFromOrderItem(int orderid, int productid)
+        public void IncreaseTotalPrice(OrderModel order, decimal amount)
         {
-            context.Orderitems.Remove(
-                context.Orderitems
-                .First(o => o.Productid == productid && o.Orderid == orderid)
-            );
-            
+            context.Orders.First(o => o.Equals(order)).Totalprice += amount;
             context.SaveChanges();
         }
 
-        
-        public List<OrderItemModel> GetItemsInBasket(int orderid){
-            return mapper.ParseOrderItem(
-                context.Orderitems
-                .Where(i => i.Orderid == orderid)
-                .ToList()
-            );
-        }
-
-        
-
-        public void DeleteOrder(int id)
+        public void DeleteFromBasket(OrderItemModel order)
         {
-            context.Orders.Remove(context.Orders.First(o => o.Orderid == id));
+            context.Orderitems.Remove(mapper.ParseOrderItem(order));
             context.SaveChanges();
         }
 
-        
-        
-        public int GetOrderId(CustomerModel customer, int locationId){
-            try{
-                var order =  mapper.ParseOrder(
-                    context.Orders
-                    .Where(o => o.Customerid == customer.id)
-                    .First(o => o.Locationid == locationId && o.Payed == false)
-                );
-                return order.id;
-            }
-            catch(System.InvalidOperationException){
-                return -1;
-            }
+        public void DecreaseTotalPrice(OrderModel order, decimal amount)
+        {
+            context.Orders.First(o => o.Equals(order)).Totalprice -= amount;
+            context.SaveChanges();
         }
 
-        
-
-
-
-        public void PlaceOrder(OrderModel order){
+        public void PlaceOrder(OrderModel order)
+        {
             context.Orders.First(i => i.Orderid == order.id).Payed = true;
-
             context.SaveChanges();
         }
 
-
-
-
-       
-        
-
-        public void ChangeOrderTotalPrice(int orderid, decimal amount)
+        public void DeleteBasket(OrderModel order)
         {
-            context.Orders.First(i => i.Orderid == orderid).Totalprice += amount;
+            context.Orders.Remove(mapper.ParseOrder(order));
             context.SaveChanges();
         }
 
-
-
-        public ProductModel GetProduct(int productid){
-            return mapper.ParseProduct(
-                context.Products
-                .First(p => p.Productid == productid)
-            );
+        public void DecreaseStock(InventoryModel inventory, int amount)
+        {
+            context.Inventory.First(i => i.Equals(inventory)).Stock -= amount;
+            context.SaveChanges();
         }
-
-       
-        
-
-        public List<OrderModel> GetOrderHistoryLocationByMostExpensive(int locationid){
-            return mapper.ParseOrder(
-                context.Orders
-                .Where(o => o.Locationid == locationid)
-                .OrderBy(o => o.Totalprice)
-                .ToList()
-            );
-
-        }
-        public List<OrderModel> GetOrderHistoryLocationByLeastExpensive(int locationid){
-            try{
-                return mapper.ParseOrder(
-                    context.Orders
-                    .Where(o => o.Locationid == locationid)
-                    .OrderByDescending(o => o.Totalprice)
-                    .ToList()
-                );
-            }
-            catch(NullReferenceException){
-                return null;
-            }
-        }
-    
-
     }
 }

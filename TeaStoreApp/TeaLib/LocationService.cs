@@ -14,13 +14,11 @@ namespace TeaLib
             this.repo = new DBRepo();
         }
 
-        public LocationModel GetLocation(int id){
-            return repo.GetLocation(id);
+        public LocationModel GetLocationInventory(int id){
+            return repo.GetLocationInventory(id);
         }
 
-        public List<InventoryModel> GetLocationInventory(int x){
-            return repo.GetLocationInventory(x);
-        }
+        
 
     }
 }

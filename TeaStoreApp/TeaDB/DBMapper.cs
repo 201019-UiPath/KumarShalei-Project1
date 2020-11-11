@@ -16,7 +16,8 @@ namespace TeaDB
             return new Customers(){
                 Customerfirstname = customer.firstName,
                 Customerlastname = customer.lastName,
-                Customeremail = customer.email
+                Customeremail = customer.email,
+                Orders = ParseOrder(customer.orders)
             };
         }
 
@@ -35,7 +36,8 @@ namespace TeaDB
                 id = customer.Customerid,
                 firstName = customer.Customerfirstname,
                 lastName = customer.Customerlastname,
-                email = customer.Customeremail
+                email = customer.Customeremail,
+                orders = ParseOrder(customer.Orders)
             };
         }
 
@@ -90,7 +92,9 @@ namespace TeaDB
         {
             return new Locations(){
                 City = location.city,
-                Stateacronym = location.state
+                Stateacronym = location.state,
+                Inventory = ParseInventory(location.inventory),
+                Orders = ParseOrder(location.orders)
             };
         }
 
@@ -109,7 +113,9 @@ namespace TeaDB
             return new LocationModel(){
                 id = locations.Locationid,
                 city = locations.City,
-                state = locations.Stateacronym
+                state = locations.Stateacronym,
+                inventory = ParseInventory(locations.Inventory),
+                orders = ParseOrder(locations.Orders)
             };
         }
 
@@ -131,11 +137,12 @@ namespace TeaDB
 
         public Orders ParseOrder(OrderModel order)
         {
-            return new Orders(){
+            return new Orders() {
                 Customerid = order.customerId,
                 Locationid = order.locationId,
                 Totalprice = order.totalPrice,
-                Payed = order.complete
+                Payed = order.complete,
+                Orderitems = ParseOrderItem(order.orderItems)
             };
         }
 
@@ -153,13 +160,13 @@ namespace TeaDB
 
         public OrderModel ParseOrder(Orders orders)
         {
-            return new OrderModel(){
+            return new OrderModel() {
                 id = orders.Orderid,
                 customerId = Convert.ToInt32(orders.Customerid),
                 locationId = Convert.ToInt32(orders.Locationid),
                 totalPrice = Convert.ToDecimal(orders.Totalprice),
-                complete = Convert.ToBoolean(orders.Payed)
-
+                complete = Convert.ToBoolean(orders.Payed),
+                orderItems = ParseOrderItem(orders.Orderitems)
             };
         }
 
@@ -249,7 +256,9 @@ namespace TeaDB
                 name = products.Productname,
                 numberOfTeaBags = Convert.ToInt32(products.Numberofteabags),
                 price = Convert.ToDecimal(products.Price),
-                description = products.Description
+                description = products.Description,
+                inventory = ParseInventory(products.Inventory),
+                orderItems = ParseOrderItem(products.Orderitems)
             };
         }
 

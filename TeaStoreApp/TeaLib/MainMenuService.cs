@@ -18,7 +18,7 @@ namespace TeaLib
 
         public void AddCustomer(CustomerModel customer){
             
-            repo.NewCustomerAsync(customer);
+            //repo.NewCustomerAsync(customer);
             System.Threading.Thread.Sleep(5);
             
         }

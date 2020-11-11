@@ -34,8 +34,12 @@ namespace TeaAPI
             services.AddControllers().AddXmlSerializerFormatters();
             services.AddDbContext<TeaContext>(options => options.UseNpgsql(Configuration.GetConnectionString("TeaDB")));
             
-            services.AddScoped<MainMenuService, MainMenuService>();
+            services.AddScoped<MainMenuService>();
             services.AddScoped<IMainMenuRepo, DBRepo>();
+
+            services.AddScoped<OrderService>();
+            services.AddScoped<IBasketRepo, DBRepo>();
+            
             services.AddScoped<IMapper, DBMapper>();
 
         }

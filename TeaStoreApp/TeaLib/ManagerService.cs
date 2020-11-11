@@ -17,7 +17,7 @@ namespace TeaLib
         }
 
         public void ReplenishStock(int locationid, int productid,int amount){
-            repo.ReplenishStock(locationid, productid, amount);
+            //repo.ReplenishStock(locationid, productid, amount);
         }
 
         public List<OrderModel> GetOrderHistoryLocationByMostExpensive(int locationid){

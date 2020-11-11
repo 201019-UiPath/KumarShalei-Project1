@@ -6,7 +6,7 @@ namespace TeaDB.IRepo
         /// <summary>
         /// Business Logic concerning our MainMenu 
         /// </summary>
-        void NewCustomerAsync(CustomerModel customer);
+        void NewCustomer(CustomerModel customer);
         CustomerModel GetCustomerInfo(string email);        
     }
 }

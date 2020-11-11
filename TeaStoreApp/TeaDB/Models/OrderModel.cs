@@ -8,5 +8,7 @@ namespace TeaDB.Models
         public int locationId{get;set;}
         public decimal totalPrice {get;set;}
         public bool complete{get;set;}
+
+        public virtual List<OrderItemModel> orderItems { get; set; }
     }
 }

@@ -8,7 +8,16 @@ namespace TeaDB.IRepo
     /// </summary>
     public interface ILocationRepo
     {
-        LocationModel GetLocation(int id);
-        List<InventoryModel> GetLocationInventory(int id);
+        LocationModel GetLocationInventory(int id);
+        
+        ProductModel GetProduct(int id);
+
+
+        void CreateNewBasket(OrderModel order);
+        OrderModel GetCurrentOrder(int customerId, int locationId);
+        void AddToBasket(OrderItemModel order);
+        void IncreaseTotalPrice(OrderModel order, decimal amount);
+
+
     }
 }

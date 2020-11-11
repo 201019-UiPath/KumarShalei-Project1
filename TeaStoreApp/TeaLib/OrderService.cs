@@ -15,7 +15,7 @@ namespace TeaLib
             this.repo = new DBRepo();
         }
 
-
+        /*
         public void NewOrder(int customerId, int locationId, decimal price){
             OrderModel order = new OrderModel(){
                 customerId = customerId,
@@ -75,8 +75,8 @@ namespace TeaLib
             repo.DecreaseStock(locationid, productid, stock);
         }
         
-        public List<OrderModel> GetOrderHistory(CustomerModel customer){
-            return repo.GetOrderHistory(customer);
+        public List<OrderModel> GetOrderHistory(int i){
+            return repo.GetOrderHistory(i);
         }
 
         public List<OrderModel> GetOrderHistoryByLeastExpensive(CustomerModel customer){
@@ -85,6 +85,6 @@ namespace TeaLib
 
         public List<OrderModel> GetOrderHistoryByMostExpensive(CustomerModel customer){
             return repo.GetOrderHistoryByMostExpensive(customer);
-        }
+        }*/
     }
 }
