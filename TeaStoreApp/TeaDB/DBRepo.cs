@@ -48,7 +48,7 @@ namespace TeaDB
                    context.Orders
                    .Where(o => o.Locationid == locationid && o.Payed == true)
                    .Include("Orderitems")
-                   .OrderByDescending(o => o.Totalprice)
+                   .OrderBy(o => o.Totalprice)
                    .ToList()
             );
         }
@@ -59,7 +59,7 @@ namespace TeaDB
                 context.Orders
                 .Where(o => o.Locationid == locationid && o.Payed == true)
                 .Include("Orderitems")
-                .OrderBy(o => o.Totalprice)
+                .OrderByDescending(c => c.Totalprice)
                 .ToList()
             );
         }
@@ -70,7 +70,6 @@ namespace TeaDB
                 context.Orders
                 .Where(o => o.Locationid == id && o.Payed == true)
                 .Include("Orderitems")
-                .OrderByDescending(c => c.Totalprice)
                 .ToList()
             );
         }
@@ -119,7 +118,7 @@ namespace TeaDB
             return mapper.ParseOrder(
                 context.Orders
                 .Include("Orderitems")
-                .First(o => o.Customerid == customerId && o.Locationid == locationId)
+                .First(o => o.Customerid == customerId && o.Locationid == locationId && o.Payed == false)
             );
         }
 

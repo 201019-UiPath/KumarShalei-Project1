@@ -10,9 +10,9 @@ namespace TeaDB.IRepo
     {
         ProductModel GetProduct(int id);
         void DeleteFromBasket(OrderItemModel order);
+        void DeleteBasket(OrderModel order);
         void DecreaseTotalPrice(OrderModel order, decimal amount);
         void PlaceOrder(OrderModel order);
-        void DeleteBasket(OrderModel order);
         void DecreaseStock(InventoryModel location, int amount);
         
         

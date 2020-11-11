@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using TeaDB;
+using TeaDB.Models;
 using TeaLib;
 
 namespace TeaAPI.Controllers
@@ -31,6 +31,22 @@ namespace TeaAPI.Controllers
             catch (Exception)
             {
                 return NotFound();
+            }
+        }
+
+        [HttpPost("add")]
+        [Produces("application/json")]
+        [Consumes("application/json")]
+        public IActionResult NewCustomer(CustomerModel customer)
+        {
+            try
+            {
+                mainMenuService.NewCustomer(customer);
+                return CreatedAtAction("NewCustomer",customer);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
             }
         }
     }

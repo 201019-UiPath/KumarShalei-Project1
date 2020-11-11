@@ -257,8 +257,8 @@ namespace TeaDB
                 numberOfTeaBags = Convert.ToInt32(products.Numberofteabags),
                 price = Convert.ToDecimal(products.Price),
                 description = products.Description,
-                inventory = ParseInventory(products.Inventory),
-                orderItems = ParseOrderItem(products.Orderitems)
+                //inventory = ParseInventory(products.Inventory),
+                //orderItems = ParseOrderItem(products.Orderitems)
             };
         }
 

@@ -21,9 +21,9 @@ namespace TeaAPI.Controllers
             this.locationService = new LocationService();
         }
 
-        [HttpGet("get/{id}")]
+        [HttpGet("get/location/{id}")]
         [Produces("application/json")]
-        public IActionResult GetCustomerOrders(int id)
+        public IActionResult GetLocationInventory(int id)
         {
             try
             {
@@ -34,5 +34,87 @@ namespace TeaAPI.Controllers
                 return NotFound();
             }
         }
+
+
+        [HttpGet("get/product/{id}")]
+        [Produces("application/json")]
+        public IActionResult GetProduct(int id)
+        {
+            try
+            {
+                return Ok(locationService.GetProduct(id));
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
+
+
+        [HttpPost("add/basket")]
+        [Produces("application/json")]
+        [Consumes("application/json")]
+        public IActionResult CreateNewBasket(OrderModel order)
+        {
+            try
+            {
+                locationService.CreateNewBasket(order);
+                return CreatedAtAction("CreateNewBasket", order);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+
+        [HttpGet("get/order/{locationid}/{customerid}")]
+        [Produces("application/json")]
+        public IActionResult GetCurrentOrder(int customerId, int locationId)
+        {
+            try
+            {
+                return Ok(locationService.GetCurrentOrder(customerId, locationId));
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
+
+
+        [HttpPost("add/basketitem")]
+        [Produces("application/json")]
+        [Consumes("application/json")]
+        public IActionResult AddToBasket(OrderItemModel order)
+        {
+            try
+            {
+                locationService.AddToBasket(order);
+                return CreatedAtAction("AddToBasket", order);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+
+        [HttpPut("put/totalprice")]
+        [Produces("application/json")]
+        [Consumes("application/json")]
+        public IActionResult IncreaseTotalPrice(OrderModel order, decimal amount)
+        {
+            try
+            {
+                locationService.IncreaseTotalPrice(order, amount);
+                return CreatedAtAction("IncreaseTotalPrice", order, amount);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+       
     }
 }

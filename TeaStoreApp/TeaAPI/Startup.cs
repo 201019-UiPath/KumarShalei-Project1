@@ -37,7 +37,7 @@ namespace TeaAPI
             services.AddScoped<MainMenuService>();
             services.AddScoped<IMainMenuRepo, DBRepo>();
 
-            services.AddScoped<OrderService>();
+            services.AddScoped<BasketService>();
             services.AddScoped<IBasketRepo, DBRepo>();
             
             services.AddScoped<IMapper, DBMapper>();
