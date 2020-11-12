@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Cors;
 using TeaDB.Models;
 using TeaLib;
 
@@ -22,6 +23,8 @@ namespace TeaAPI.Controllers
 
         [HttpGet("get/{email}")]
         [Produces("application/json")]
+        [Consumes("application/json")]
+        [EnableCors("_myAllowSpecificOrigins")]
         public IActionResult GetCustomerInfo(string email)
         {
             try
@@ -37,6 +40,7 @@ namespace TeaAPI.Controllers
         [HttpPost("add")]
         [Produces("application/json")]
         [Consumes("application/json")]
+        [EnableCors("_myAllowSpecificOrigins")]
         public IActionResult NewCustomer(CustomerModel customer)
         {
             try

@@ -21,6 +21,7 @@ namespace TeaAPI
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -31,6 +32,15 @@ namespace TeaAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options => {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                    builder => {
+                        builder.WithOrigins("*")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                    });
+            });
+
             services.AddControllers().AddXmlSerializerFormatters();
             services.AddDbContext<TeaContext>(options => options.UseNpgsql(Configuration.GetConnectionString("TeaDB")));
             
@@ -39,7 +49,13 @@ namespace TeaAPI
 
             services.AddScoped<BasketService>();
             services.AddScoped<IBasketRepo, DBRepo>();
-            
+
+            services.AddScoped<ManagerService>();
+            services.AddScoped<IManagerRepo, DBRepo>();
+
+            services.AddScoped<LocationService>();
+            services.AddScoped<ILocationRepo, DBRepo>();
+
             services.AddScoped<IMapper, DBMapper>();
 
         }
@@ -55,6 +71,8 @@ namespace TeaAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseAuthorization();
 

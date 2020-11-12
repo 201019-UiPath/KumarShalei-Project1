@@ -150,12 +150,17 @@ namespace TeaDB
 
         public ICollection<Orders> ParseOrder(List<OrderModel> order)
         {
-            ICollection<Orders> orders = new List<Orders>();
-            foreach (var o in order){
+            if (order != null)
+            {
+                ICollection<Orders> orders = new List<Orders>();
+                foreach (var o in order)
+                {
 
-                orders.Add(ParseOrder(o));
+                    orders.Add(ParseOrder(o));
+                }
+                return orders;
             }
-            return orders;
+            return null;
         }
 
         public OrderModel ParseOrder(Orders orders)
