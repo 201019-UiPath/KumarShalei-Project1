@@ -38,33 +38,54 @@ function ReturningCustomer() {
 function GetCustomerInfo(){
     let email = document.querySelector('#userEmail').value;
     let url = 'https://localhost:5001/MainMenu/get/' + email;
-    fetch(url)
+    let customer = fetch(url)
     .then(response => response.json())
-    .then(result => alert('Welcome ' + result.firstName));
+    localStorage.setItem('customerId', customer.id);
+    alert("Welcome "+ customer.id);
 }
 
 function GetLocationInventory(id){
     let url = 'https://localhost:5001/Location/get/location/' + id;
+    localStorage.setItem('LocationId', id);
     fetch(url)
     .then(response => response.json())
     .then(result => {
         document.querySelectorAll('#inventory tbody tr').forEach(element => element.remove());
         let table = document.querySelector('#inventory tbody');
-        for(let i = 0; i < result.inventory.length; ++i)
+        for(let i = 0; i < result.length; ++i)
         {
+            
             let row = table.insertRow(table.rows.length);
+
             let rnCell = row.insertCell(0);
-            rnCell.innerHTML = GetProduct(result.inventory[i].productId);
+            rnCell.innerHTML = result[i].name;
 
             let aCell = row.insertCell(1);
-            aCell.innerHTML = result.inventory[i].stock;
+            aCell.innerHTML = result[i].description;
+
+            let tCell = row.insertCell(2);
+            let stock;
+            for(let j = 0; j < result[i].inventory; ++j){
+                if(result[i].inventory[j].locationId == id){
+                    stock = result[i].inventory[j].stock;
+                    
+                }
+            }
+            tCell.innerHTML = stock;
+
+            let hCell = row.insertCell(3);
+            hCell.innerHTML = 'amount';
+
+            let oCell = row.insertCell(4);
+            oCell.innerHTML = 'Add to Basket';
 
         }
+        
     });
-};
+}
 
 function GetProduct(id){
     let url = 'https://localhost:5001/location/get/product/' + id;
     let product = fetch(url).then(response => response.json());
-    return product.name;
+    return product;
 }
