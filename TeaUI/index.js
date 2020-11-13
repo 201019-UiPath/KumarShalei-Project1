@@ -65,7 +65,7 @@ function GetLocationInventory(id){
 
             let tCell = row.insertCell(2);
             let stock;
-            for(let j = 0; j < result[i].inventory; ++j){
+            for(let j = 0; j < result[i].inventory.length; ++j){
                 if(result[i].inventory[j].locationId == id){
                     stock = result[i].inventory[j].stock;
                     
@@ -73,19 +73,54 @@ function GetLocationInventory(id){
             }
             tCell.innerHTML = stock;
 
-            let hCell = row.insertCell(3);
-            hCell.innerHTML = 'amount';
+            let pCell = row.insertCell(3);
+            pCell.innerHTML = result[i].price;
 
-            let oCell = row.insertCell(4);
-            oCell.innerHTML = 'Add to Basket';
+            let hCell = row.insertCell(4);
+            hCell.innerHTML = "<input type='text' id='product'"+i+"' placeholder = 'Enter Amount'>";
+            
+
+            let oCell = row.insertCell(5);
+            oCell.innerHTML = '<input type="button" value="AddtoBasket" class="btn btn-info" id="add'+i+'">';
+            
+            document.getElementById('add'+i).onclick = () => alert(document.querySelector('#product'+i).value)//AddtoBasket(result[i].id, document.getElementById('product'+i).value);
 
         }
         
     });
 }
 
-function GetProduct(id){
-    let url = 'https://localhost:5001/location/get/product/' + id;
-    let product = fetch(url).then(response => response.json());
-    return product;
+// function GetProduct(id){
+//     let url = 'https://localhost:5001/location/get/product/' + id;
+//     let product = fetch(url).then(response => response.json());
+//     return product;
+// }
+
+function AddtoBasket(id, amount){
+    alert(id + " amount = "+amount);
+    // if notfound == featch (get/order/{locationid}/{customerid})
+    // create new baskest add/basket
+    // add item to order add/basketitem
+    // change price put/totalprice
+    // if(confirm('Are you sure you want to delete house with ID='+houseId+'?'))
+    // {
+    //     fetch('https://localhost:5001/location/get/product/'+houseId, {method: 'DELETE'})
+    //     .then(response =>
+    //     {
+    //         alert('Deleted house with ID='+houseId+'.');
+    //         GetAllHouses();
+    //     });
+    // }
+}
+
+function ViewBasket(){
+
+}
+
+function PlaceOrder(){
+
+}
+
+function ViewBasketItems(){
+    
 }
