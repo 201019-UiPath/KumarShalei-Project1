@@ -71,6 +71,7 @@ namespace TeaDB
 
         public InventoryModel ParseInventory(Inventory inventorys)
         {
+            
             return new InventoryModel(){
                 id = inventorys.Id,
                 locationId = Convert.ToInt32(inventorys.Locationid),
@@ -226,11 +227,16 @@ namespace TeaDB
 
         public List<OrderItemModel> ParseOrderItem(ICollection<Orderitems> orderlist)
         {
-            List<OrderItemModel> orderlists = new List<OrderItemModel>();
-            foreach (var o in orderlist){
-                orderlists.Add(ParseOrderItem(o));
+            if (orderlist != null)
+            {
+                List<OrderItemModel> orderlists = new List<OrderItemModel>();
+                foreach (var o in orderlist)
+                {
+                    orderlists.Add(ParseOrderItem(o));
+                }
+                return orderlists;
             }
-            return orderlists;
+            return null;
         }
 
         public Products ParseProduct(ProductModel product)
@@ -262,8 +268,8 @@ namespace TeaDB
                 numberOfTeaBags = Convert.ToInt32(products.Numberofteabags),
                 price = Convert.ToDecimal(products.Price),
                 description = products.Description,
-                //inventory = ParseInventory(products.Inventory),
-                //orderItems = ParseOrderItem(products.Orderitems)
+                inventory = ParseInventory(products.Inventory),
+                orderItems = ParseOrderItem(products.Orderitems)
             };
         }
 

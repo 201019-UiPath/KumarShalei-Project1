@@ -15,9 +15,9 @@ namespace TeaDB
     public class DBRepo : IMainMenuRepo, IManagerRepo, ILocationRepo, IBasketRepo
 
     {
-        public  TeaContext context {get;set;}
-        public  IMapper mapper {get;set;}
-        public DBRepo(){
+        public TeaContext context { get; set; }
+        public IMapper mapper { get; set; }
+        public DBRepo() {
             this.context = new TeaContext();
             this.mapper = new DBMapper();
         }
@@ -96,9 +96,16 @@ namespace TeaDB
             );
         }
 
-        
-        
 
+
+        public List<ProductModel> GetAllProducts()
+        {
+            return mapper.ParseProduct(
+                context.Products
+                .Include("Inventory")
+                //.Where(p => p.Locationid == id)
+                .ToList());
+        }
         public ProductModel GetProduct(int id)
         {
             return mapper.ParseProduct(
@@ -163,5 +170,8 @@ namespace TeaDB
             context.Inventory.First(i => i.Equals(inventory)).Stock -= amount;
             context.SaveChanges();
         }
+
+
+        
     }
 }

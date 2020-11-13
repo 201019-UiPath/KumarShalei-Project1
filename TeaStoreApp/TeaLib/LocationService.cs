@@ -39,9 +39,27 @@ namespace TeaLib
         {
             repo.AddToBasket(order);
         }
+
         public void IncreaseTotalPrice(OrderModel order, decimal amount)
         {
             repo.IncreaseTotalPrice(order, amount);
+        }
+
+        public List<ProductModel> GetInventoryProducts(int id)
+        {
+            List<ProductModel> products = repo.GetAllProducts();
+            List<ProductModel> inventory = new List<ProductModel>();
+            foreach(var p in products)
+            {
+                foreach(var i in p.inventory)
+                {
+                    if(i.locationId == id)
+                    {
+                        inventory.Add(p);
+                    }
+                }
+            }
+            return inventory;
         }
 
 

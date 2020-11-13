@@ -29,7 +29,7 @@ namespace TeaAPI.Controllers
         {
             try
             {
-                return Ok(locationService.GetLocationInventory(id));
+                return Ok(locationService.GetInventoryProducts(id));
             }
             catch (Exception)
             {
