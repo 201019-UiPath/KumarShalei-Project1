@@ -93,7 +93,7 @@ namespace TeaTest
             };
             
             //Act
-            repo.NewCustomerAsync (testCustomer);
+            repo.NewCustomer (testCustomer);
 
             //Assert
             using var assertContext = new TeaContext(options);
@@ -117,7 +117,7 @@ namespace TeaTest
             };
             
             //Act
-            repo.NewOrder(testOrder);
+            repo.CreateNewBasket(testOrder);
 
             //Assert
             using var assertContext = new TeaContext(options);
@@ -136,7 +136,7 @@ namespace TeaTest
             };
             
             //Act
-            repo.AddProductToOrderItem(testOrderItem);
+            repo.AddToBasket(testOrderItem);
 
             //Assert
             using var assertContext = new TeaContext(options);
@@ -197,7 +197,7 @@ namespace TeaTest
             };
             Seed(testContext);
             //Act
-            var result = repo.GetLocation(1);
+            var result = repo.GetLocationInventory(1);
 
             //Assert
             using var assertContext = new TeaContext(options);
@@ -237,11 +237,11 @@ namespace TeaTest
             };
             Seed(testContext);
             //Act
-            var result = repo.GetOrderId(testCustomer,1);
+            var result = repo.GetCurrentOrder(testCustomer.id,1);
 
             //Assert
             using var assertContext = new TeaContext(options);
-            Assert.Equal(result, testCustomer.id);
+            Assert.Equal(result.customerId, testCustomer.id);
         }
 
 
@@ -257,11 +257,11 @@ namespace TeaTest
             };
             Seed(testContext);
             //Act
-            var result = repo.GetItemsInBasket(1);
+            var result = repo.GetCurrentOrder(1,1);
 
             //Assert
             using var assertContext = new TeaContext(options);
-            Assert.Equal(result.Count, 1);
+            Assert.Equal(result.orderItems.Count, 1);
         }
 
 
@@ -278,7 +278,7 @@ namespace TeaTest
             };
             Seed(testContext);
             //Act
-            repo.DeleteOrder(1);
+            repo.DeleteBasket(testOrder);
 
             //Assert
             using var assertContext = new TeaContext(options);

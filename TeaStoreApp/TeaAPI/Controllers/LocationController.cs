@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using TeaDB;
 using TeaDB.Models;
@@ -23,6 +24,7 @@ namespace TeaAPI.Controllers
 
         [HttpGet("get/location/{id}")]
         [Produces("application/json")]
+        [EnableCors("_myAllowSpecificOrigins")]
         public IActionResult GetLocationInventory(int id)
         {
             try
@@ -38,6 +40,8 @@ namespace TeaAPI.Controllers
 
         [HttpGet("get/product/{id}")]
         [Produces("application/json")]
+        
+        [EnableCors("_myAllowSpecificOrigins")]
         public IActionResult GetProduct(int id)
         {
             try
@@ -54,6 +58,7 @@ namespace TeaAPI.Controllers
         [HttpPost("add/basket")]
         [Produces("application/json")]
         [Consumes("application/json")]
+        [EnableCors("_myAllowSpecificOrigins")]
         public IActionResult CreateNewBasket(OrderModel order)
         {
             try
@@ -70,6 +75,7 @@ namespace TeaAPI.Controllers
 
         [HttpGet("get/order/{locationid}/{customerid}")]
         [Produces("application/json")]
+        [EnableCors("_myAllowSpecificOrigins")]
         public IActionResult GetCurrentOrder(int customerId, int locationId)
         {
             try
@@ -86,6 +92,7 @@ namespace TeaAPI.Controllers
         [HttpPost("add/basketitem")]
         [Produces("application/json")]
         [Consumes("application/json")]
+        [EnableCors("_myAllowSpecificOrigins")]
         public IActionResult AddToBasket(OrderItemModel order)
         {
             try
@@ -103,6 +110,7 @@ namespace TeaAPI.Controllers
         [HttpPut("put/totalprice")]
         [Produces("application/json")]
         [Consumes("application/json")]
+        [EnableCors("_myAllowSpecificOrigins")]
         public IActionResult IncreaseTotalPrice(OrderModel order, decimal amount)
         {
             try
