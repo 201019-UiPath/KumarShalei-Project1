@@ -11,8 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeaTest", "TeaTest\TeaTest.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeaAPI", "TeaAPI\TeaAPI.csproj", "{62B9DFA6-593D-4EEA-93EC-CAD6CC22130D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeaWeb", "TeaWeb\TeaWeb.csproj", "{9F96BF9F-BC23-4155-9265-3B0218A8F2ED}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,18 +69,6 @@ Global
 		{62B9DFA6-593D-4EEA-93EC-CAD6CC22130D}.Release|x64.Build.0 = Release|Any CPU
 		{62B9DFA6-593D-4EEA-93EC-CAD6CC22130D}.Release|x86.ActiveCfg = Release|Any CPU
 		{62B9DFA6-593D-4EEA-93EC-CAD6CC22130D}.Release|x86.Build.0 = Release|Any CPU
-		{9F96BF9F-BC23-4155-9265-3B0218A8F2ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9F96BF9F-BC23-4155-9265-3B0218A8F2ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9F96BF9F-BC23-4155-9265-3B0218A8F2ED}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{9F96BF9F-BC23-4155-9265-3B0218A8F2ED}.Debug|x64.Build.0 = Debug|Any CPU
-		{9F96BF9F-BC23-4155-9265-3B0218A8F2ED}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{9F96BF9F-BC23-4155-9265-3B0218A8F2ED}.Debug|x86.Build.0 = Debug|Any CPU
-		{9F96BF9F-BC23-4155-9265-3B0218A8F2ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9F96BF9F-BC23-4155-9265-3B0218A8F2ED}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9F96BF9F-BC23-4155-9265-3B0218A8F2ED}.Release|x64.ActiveCfg = Release|Any CPU
-		{9F96BF9F-BC23-4155-9265-3B0218A8F2ED}.Release|x64.Build.0 = Release|Any CPU
-		{9F96BF9F-BC23-4155-9265-3B0218A8F2ED}.Release|x86.ActiveCfg = Release|Any CPU
-		{9F96BF9F-BC23-4155-9265-3B0218A8F2ED}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
