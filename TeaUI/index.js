@@ -77,13 +77,12 @@ function GetLocationInventory(id){
             pCell.innerHTML = result[i].price;
 
             let hCell = row.insertCell(4);
-            hCell.innerHTML = "<input type='text' id='product'"+i+"' placeholder = 'Enter Amount'>";
-            
+            hCell.innerHTML = '<input id="product"'+i+'" required placeholder = "Enter Amount">';
+            //hCell.innerHTML =  '<input type="checkbox" id="product"'+i+'" class="form-control" >';
 
             let oCell = row.insertCell(5);
-            oCell.innerHTML = '<input type="button" value="AddtoBasket" class="btn btn-info" id="add'+i+'">';
-            
-            document.getElementById('add'+i).onclick = () => alert(document.querySelector('#product'+i).value)//AddtoBasket(result[i].id, document.getElementById('product'+i).value);
+            oCell.innerHTML = '<input type="button"  id="add'+i+'" value="AddtoBasket" class="btn btn-info">';
+            document.getElementById('add'+i).onclick = () => AddtoBasket(result.id, document.getElementById('product'+i).checked);
 
         }
         
@@ -122,5 +121,5 @@ function PlaceOrder(){
 }
 
 function ViewBasketItems(){
-    
+
 }
