@@ -124,5 +124,19 @@ namespace TeaAPI.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet("get/products")]
+        [Produces("application/json")]
+        public IActionResult GetAllProducts()
+        {
+            try
+            {
+                return Ok(managerService.GetAllProducts());
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
     }
 }

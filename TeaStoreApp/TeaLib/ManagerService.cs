@@ -44,6 +44,11 @@ namespace TeaLib
         {
             repo.AddItemToInventory(inventory);
         }
+
+        public List<ProductModel> GetAllProducts()
+        {
+            return repo.GetAllProducts();
+        }
     }
     
 

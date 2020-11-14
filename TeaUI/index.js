@@ -1,3 +1,4 @@
+
 function Register() {
     document.getElementById('NewCustomer').style.display = 'block';
     document.getElementById('ReturningButton').style.display = 'none'; 
@@ -25,6 +26,7 @@ function AddCustomer()
     xhr.open("POST", 'https://localhost:5001/MainMenu/add', false);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(customer));
+    GetCustomerInfo()
 
 }
 
@@ -38,15 +40,24 @@ function ReturningCustomer() {
 function GetCustomerInfo(){
     let email = document.querySelector('#userEmail').value;
     let url = 'https://localhost:5001/MainMenu/get/' + email;
-    let customer = fetch(url)
+    fetch(url)
     .then(response => response.json())
-    localStorage.setItem('customerId', customer.id);
-    alert("Welcome "+ customer.id);
+    .then(result => CustomerLocal(result));
+}
+
+function CustomerLocal(customer){
+    localStorage.setItem("customerId", parseInt(customer.id));
+    if(customer.id == 1){
+        window.location.href = "ManagerIndex.html";
+    }
+    else {
+        window.location.href = "LocationIndex.html";
+    }
 }
 
 function GetLocationInventory(id){
+    localStorage.setItem("LocationId", parseInt(id));
     let url = 'https://localhost:5001/Location/get/location/' + id;
-    localStorage.setItem('LocationId', id);
     fetch(url)
     .then(response => response.json())
     .then(result => {
@@ -77,26 +88,22 @@ function GetLocationInventory(id){
             pCell.innerHTML = result[i].price;
 
             let hCell = row.insertCell(4);
-            hCell.innerHTML = '<input id="product"'+i+'" required placeholder = "Enter Amount">';
+            hCell.innerHTML = '<input type="text" id="product"'+i+'" placeholder = "Enter Amount"/><input type="submit"  id="add'+i+'" value="AddtoBasket" />';
+            document.getElementById('add'+i).onclick = () => AddtoBasket(result[i].id, document.getElementById('product'+parseInt( i)).value);
+            //hCell.innerHTML = '<input type="button"  id="add'+i+'" value="AddtoBasket" class="btn btn-info">';
             //hCell.innerHTML =  '<input type="checkbox" id="product"'+i+'" class="form-control" >';
 
-            let oCell = row.insertCell(5);
-            oCell.innerHTML = '<input type="button"  id="add'+i+'" value="AddtoBasket" class="btn btn-info">';
-            document.getElementById('add'+i).onclick = () => AddtoBasket(result.id, document.getElementById('product'+i).checked);
+            // let oCell = row.insertCell(5);
+            // oCell.innerHTML = '<input type="button"  id="add'+i+'" value="AddtoBasket" class="btn btn-info">';
+            // document.getElementById('add'+i).onclick = () => AddtoBasket(result.id, document.getElementById('product'+i).checked);
 
         }
         
     });
 }
 
-// function GetProduct(id){
-//     let url = 'https://localhost:5001/location/get/product/' + id;
-//     let product = fetch(url).then(response => response.json());
-//     return product;
-// }
-
-function AddtoBasket(id, amount){
-    alert(id + " amount = "+amount);
+function AddtoBasket(id, i){
+    alert(id + " amount = "+ i );
     // if notfound == featch (get/order/{locationid}/{customerid})
     // create new baskest add/basket
     // add item to order add/basketitem
