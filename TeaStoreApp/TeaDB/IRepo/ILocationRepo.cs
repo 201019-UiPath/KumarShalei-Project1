@@ -16,7 +16,7 @@ namespace TeaDB.IRepo
         void CreateNewBasket(OrderModel order);
         OrderModel GetCurrentOrder(int customerId, int locationId);
         void AddToBasket(OrderItemModel order);
-        void IncreaseTotalPrice(OrderModel order, decimal amount);
+        void IncreaseTotalPrice(int orderid, decimal amount);
 
 
     }

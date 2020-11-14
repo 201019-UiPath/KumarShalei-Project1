@@ -32,10 +32,12 @@ namespace TeaDB
         {
             return mapper.ParseCustomer(
                 context.Customers
-                .First(c => c.Customeremail == email)
+                .Include("Orders")
+                .First(c => c.Customeremail == email )
             );
         }
 
+      
         public void ReplenishStock(InventoryModel inventory, int amount)
         {
             context.Inventory.First(i => i.Locationid == inventory.locationId && i.Productid == inventory.productId).Stock += amount;
@@ -135,9 +137,9 @@ namespace TeaDB
             context.SaveChanges();
         }
 
-        public void IncreaseTotalPrice(OrderModel order, decimal amount)
+        public void IncreaseTotalPrice(int orderid, decimal amount)
         {
-            context.Orders.First(o => o.Equals(order)).Totalprice += amount;
+            context.Orders.First(o => o.Orderid == orderid).Totalprice += amount;
             context.SaveChanges();
         }
 

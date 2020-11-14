@@ -37,6 +37,39 @@ namespace TeaAPI.Controllers
             }
         }
 
+        [HttpGet("get/order/least/{email}")]
+        [Produces("application/json")]
+        [Consumes("application/json")]
+        [EnableCors("_myAllowSpecificOrigins")]
+        public IActionResult GetCustomerOrderLeastToMost(string email)
+        {
+            try
+            {
+                return Ok(mainMenuService.GetCustomerOrderLeastToMost(email));
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
+
+
+        [HttpGet("get/order/most/{email}")]
+        [Produces("application/json")]
+        [Consumes("application/json")]
+        [EnableCors("_myAllowSpecificOrigins")]
+        public IActionResult GetCustomerOrderMostToLeast(string email)
+        {
+            try
+            {
+                return Ok(mainMenuService.GetCustomerOrderMostToLeast(email));
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
+
         [HttpPost("add")]
         [Produces("application/json")]
         [Consumes("application/json")]

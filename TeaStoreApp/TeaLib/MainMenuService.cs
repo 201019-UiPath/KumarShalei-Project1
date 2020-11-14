@@ -3,6 +3,7 @@ using System;
 using TeaDB;
 using TeaDB.Models;
 using TeaDB.IRepo;
+using System.Linq;
 
 namespace TeaLib
 {
@@ -25,7 +26,22 @@ namespace TeaLib
             return repo.GetCustomerInfo(email);
         }
 
+        public CustomerModel GetCustomerOrderLeastToMost(string email)
+        {
+            CustomerModel customer = repo.GetCustomerInfo(email);
+            customer.orders.OrderBy(o => o.totalPrice);
+            return customer;
+        }
+
+        public CustomerModel GetCustomerOrderMostToLeast (string email)
+        {
+            CustomerModel customer = repo.GetCustomerInfo(email);
+            customer.orders.OrderByDescending(o => o.totalPrice);
+            return customer;
+        }
+
+
     }
- 
-    
+
+
 }

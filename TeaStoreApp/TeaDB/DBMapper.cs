@@ -178,11 +178,16 @@ namespace TeaDB
 
         public List<OrderModel> ParseOrder(ICollection<Orders> orders)
         {
-            List<OrderModel> order = new List<OrderModel>();
-            foreach (var o in orders){
-                order.Add(ParseOrder(o));
+            if (orders != null)
+            {
+                List<OrderModel> order = new List<OrderModel>();
+                foreach (var o in orders)
+                {
+                    order.Add(ParseOrder(o));
+                }
+                return order;
             }
-            return order;
+            return null;
         }
 
 
@@ -206,12 +211,17 @@ namespace TeaDB
 
         public ICollection<Orderitems> ParseOrderItem(List<OrderItemModel> orderItem)
         {
-            ICollection<Orderitems> orderItems = new List<Orderitems>();
-            foreach (var o in orderItem){
+            if (orderItem != null)
+            {
+                ICollection<Orderitems> orderItems = new List<Orderitems>();
+                foreach (var o in orderItem)
+                {
 
-                orderItems.Add(ParseOrderItem(o));
+                    orderItems.Add(ParseOrderItem(o));
+                }
+                return orderItems;
             }
-            return orderItems;
+            return null;
         }
 
         public OrderItemModel ParseOrderItem(Orderitems ordertimes)

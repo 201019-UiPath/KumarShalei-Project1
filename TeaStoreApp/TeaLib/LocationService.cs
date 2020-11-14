@@ -40,9 +40,9 @@ namespace TeaLib
             repo.AddToBasket(order);
         }
 
-        public void IncreaseTotalPrice(OrderModel order, decimal amount)
+        public void IncreaseTotalPrice(int orderid, decimal amount)
         {
-            repo.IncreaseTotalPrice(order, amount);
+            repo.IncreaseTotalPrice(orderid, amount);
         }
 
         public List<ProductModel> GetInventoryProducts(int id)

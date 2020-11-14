@@ -48,6 +48,7 @@ function GetCustomerInfo(){
 
 function CustomerLocal(customer){
     localStorage.setItem("customerId", parseInt(customer.id));
+    localStorage.setItem("customerEmail", customer.email);
     if(customer.id == 1){
         window.location.href = "ManagerIndex.html";
     }
@@ -127,12 +128,12 @@ function AddtoBasket(productid, i){
 
     let order = {};
     order.id = parseInt(localStorage.getItem('orderId'));
-    order.customerId = parseInt(localStorage.getItem('customerId'));
-    order.locationId = parseInt(localStorage.getItem('locationId'));
-    order.totalPrice = parseFloat(localStorage.getItem('orderTotalPrice') + i);
-    order.false = false;
+    order.customerId = parseInt(localStorage.getItem('customerId')); 
+    order.locationId = parseInt(localStorage.getItem('locationId'));  
+    order.totalPrice = parseFloat(localStorage.getItem('orderTotalPrice')) +i;
+    
 
-    xhr.open("PUT", 'https://localhost:5001/Location/put/totalprice', true);
+    xhr.open("PUT", 'https://localhost:5001/Location/edit/totalprice', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(order));
 
@@ -153,6 +154,7 @@ function CreateBasket(){
     xhr.open("POST", 'https://localhost:5001/Location/add/basket', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(basket));
+    
 }
 
 
@@ -160,13 +162,15 @@ function GetOrderId(){
     let locationid = localStorage.getItem('locationId');
     let customerid = localStorage.getItem('customerId');
     let url = 'https://localhost:5001/Location/get/order/' + locationid + '/' + customerid;
-    if (fetch(url).staus == 404){
-        CreateBasket();
-    }
+
     fetch(url)
     .then(result => result.json())
-    .then(result => localStorage.setItem('orderId', parseInt(result.id)) && localStorage.setItem('orderTotalPrice',parseFloat(result.totalPrice)));
+    .then(result => localStorage.setItem('orderTotalPrice',parseFloat(result.totalPrice)) & localStorage.setItem('orderId', parseInt(result.id)));
+    
+        
+    
 }
+
 
 function ViewBasketItem(){
     let locationid = localStorage.getItem('locationId');
@@ -200,4 +204,81 @@ function ViewBasketItem(){
 
 function PlaceOrder(){
 
+
+}
+
+
+function CustomerOrders(){
+    let url = 'https://localhost:5001/MainMenu/get/' + localStorage.getItem('customerEmail');
+    fetch(url)
+    .then(response => response.json())
+    .then(result => {
+        document.querySelectorAll('#customerorderlist tbody tr').forEach(element => element.remove());
+        let table = document.querySelector('#customerorderlist tbody');
+        for(let i = 0; i < result.orders.length; ++i)
+        {
+            if(result.orders[i].complete == true){
+            
+                let row = table.insertRow(table.rows.length);
+
+                let rnCell = row.insertCell(0);
+                rnCell.innerHTML = result.orders[i].id;
+
+                let aCell = row.insertCell(1);
+                aCell.innerHTML = result.orders[i].totalPrice;
+
+            }
+        }
+        
+    });
+}
+
+function CustomerOrderLeastToMost(){
+    let url = 'https://localhost:5001/MainMenu/get/order/least/' + localStorage.getItem('customerEmail');
+    fetch(url)
+    .then(response => response.json())
+    .then(result => {
+        document.querySelectorAll('#customerorderlist tbody tr').forEach(element => element.remove());
+        let table = document.querySelector('#customerorderlist tbody');
+        for(let i = 0; i < result.orders.length; ++i)
+        {
+            if(result.orders[i].complete == true){
+            
+                let row = table.insertRow(table.rows.length);
+
+                let rnCell = row.insertCell(0);
+                rnCell.innerHTML = result.orders[i].id;
+
+                let aCell = row.insertCell(1);
+                aCell.innerHTML = result.orders[i].totalPrice;
+
+            }
+        }
+        
+    });
+}
+
+function CustomerOrderMostToLeast(){
+    let url = 'https://localhost:5001/MainMenu/get/order/most/' + localStorage.getItem('customerEmail');
+    fetch(url)
+    .then(response => response.json())
+    .then(result => {
+        document.querySelectorAll('#customerorderlist tbody tr').forEach(element => element.remove());
+        let table = document.querySelector('#customerorderlist tbody');
+        for(let i = 0; i < result.orders.length; ++i)
+        {
+            if(result.orders[i].complete == true){
+            
+                let row = table.insertRow(table.rows.length);
+
+                let rnCell = row.insertCell(0);
+                rnCell.innerHTML = result.orders[i].id;
+
+                let aCell = row.insertCell(1);
+                aCell.innerHTML = result.orders[i].totalPrice;
+
+            }
+        }
+        
+    });
 }

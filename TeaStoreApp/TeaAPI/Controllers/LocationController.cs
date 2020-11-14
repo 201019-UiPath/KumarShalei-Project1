@@ -107,16 +107,16 @@ namespace TeaAPI.Controllers
         }
 
         
-        [HttpPut("put/totalprice")]
+        [HttpPut("edit/totalprice")]
         [Produces("application/json")]
         [Consumes("application/json")]
         [EnableCors("_myAllowSpecificOrigins")]
-        public IActionResult IncreaseTotalPrice(OrderModel order, decimal amount)
+        public IActionResult IncreaseTotalPrice(OrderModel order)
         {
             try
             {
-                locationService.IncreaseTotalPrice(order, amount);
-                return CreatedAtAction("IncreaseTotalPrice", order, amount);
+                locationService.IncreaseTotalPrice(order.id, order.totalPrice);
+                return CreatedAtAction("IncreaseTotalPrice", order);
             }
             catch (Exception)
             {
