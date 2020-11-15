@@ -26,8 +26,12 @@ function AddCustomer()
     xhr.open("POST", 'https://localhost:5001/MainMenu/add', false);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(customer));
-    GetCustomerInfo()
-
+    alert('Welcome ' + customer.firstName);
+    
+    let url = 'https://localhost:5001/MainMenu/get/' + customer.email;
+    fetch(url)
+    .then(response => response.json())
+    .then(result => CustomerLocal(result));
 }
 
 
@@ -47,6 +51,7 @@ function GetCustomerInfo(){
 }
 
 function CustomerLocal(customer){
+    localStorage.clear();
     localStorage.setItem("customerId", parseInt(customer.id));
     localStorage.setItem("customerEmail", customer.email);
     if(customer.id == 1){
@@ -114,6 +119,7 @@ function AddtoBasket(productid, i){
 
     let item = {};
     item.orderId = parseInt(localStorage.getItem('orderId'));
+    alert(item.orderId);
     item.productId = productid;
     item.amount = 1;
     item.totalPrice = i;
@@ -132,7 +138,7 @@ function AddtoBasket(productid, i){
     order.locationId = parseInt(localStorage.getItem('locationId'));  
     order.totalPrice = parseFloat(localStorage.getItem('orderTotalPrice')) +i;
     
-
+    xhr = new XMLHttpRequest();
     xhr.open("PUT", 'https://localhost:5001/Location/edit/totalprice', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(order));
@@ -143,6 +149,7 @@ function AddtoBasket(productid, i){
     stock.productId = productid;
     stock.stock = 1;
 
+    xhr = new XMLHttpRequest();
     xhr.open("PUT", 'https://localhost:5001/Basket/put/stock', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(stock));
@@ -150,23 +157,23 @@ function AddtoBasket(productid, i){
 }
 
 
-function CreateBasket(){
-    let basket = {};
-    basket.customerId = parseInt(localStorage.getItem('customerId'));
-    basket.locationId = parseInt(localStorage.getItem('locationId'));
-    basket.totalPrice = 0.00;
-    basket.complete = false;
+// function CreateBasket(){
+//     let basket = {};
+//     basket.customerId = parseInt(localStorage.getItem('customerId'));
+//     basket.locationId = parseInt(localStorage.getItem('locationId'));
+//     basket.totalPrice = 0.00;
+//     basket.complete = false;
 
-    let xhr = new XMLHttpRequest();
-    if(this.readyState == 4 && this.status > 199 && this.status < 300) {
-        alert('New Basket Added!')
-    }
-    xhr.open("POST", 'https://localhost:5001/Location/add/basket', true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify(basket));
-    GetOrderId();
+//     let xhr = new XMLHttpRequest();
+//     if(this.readyState == 4 && this.status > 199 && this.status < 300) {
+//         alert('New Basket Added!')
+//     }
+//     xhr.open("POST", 'https://localhost:5001/Location/add/basket', false);
+//     xhr.setRequestHeader('Content-Type', 'application/json');
+//     xhr.send(JSON.stringify(basket));
+//     //GetOrderId();
     
-}
+// }
 
 
 function GetOrderId(){
@@ -174,18 +181,38 @@ function GetOrderId(){
     let customerid = localStorage.getItem('customerId');
     let url = 'https://localhost:5001/Location/get/order/' + locationid + '/' + customerid;
 
+    // fetch(url)
+    // .then(result => {
+    //     if (result.status == 404) {
+    //         CreateBasket();
+    //         GetOrderId();
+    //     } else {
+    //         result => result.json();
+    //         localStorage.setItem('orderTotalPrice',parseFloat(result.totalPrice));
+    //         localStorage.setItem('orderId', parseInt(result.id));
+            
+    //     }
+    //   });
+    
+    //   .then(result => result.json())
+    // .then(result => 
+    //     {if(parseInt(result.status) == 404){
+    //         CreateBasket();
+    //         GetOrderId();
+    //     } else{
+    //         localStorage.setItem('orderTotalPrice',parseFloat(result.totalPrice));
+    //         localStorage.setItem('orderId', parseInt(result.id));
+    //     }
+    // });
+
+    // if(fetch(url).status == 404){
+    //     CreateBasket();
+    //     GetOrderId();
+    // } 
     fetch(url)
     .then(result => result.json())
-    .then(result => 
-        {if(result.status == 404){
-            CreateBasket();
-        } else{
-            result => localStorage.setItem('orderTotalPrice',parseFloat(result.totalPrice))& localStorage.setItem('orderId', parseInt(result.id));
-        }
-        
-    });
-    alert(localStorage.getItem('orderTotalPrice'));
-    
+    .then(result => localStorage.setItem('orderTotalPrice',parseFloat(result.totalPrice))& localStorage.setItem('orderId', parseInt(result.id)));
+   
 }
 
 
