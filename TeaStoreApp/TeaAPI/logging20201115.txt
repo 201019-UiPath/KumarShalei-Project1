@@ -221,3 +221,4 @@
 2020-11-15 13:47:17.701 -05:00 [INF] Executed endpoint 'TeaAPI.Controllers.LocationController.GetProduct (TeaAPI)'
 2020-11-15 13:47:17.707 -05:00 [INF] Request finished in 103.273ms 200 application/json; charset=utf-8
 2020-11-15 13:47:17.707 -05:00 [INF] Request finished in 103.5398ms 200 application/json; charset=utf-8
+2020-11-15 13:50:13.299 -05:00 [INF] Application is shutting down...

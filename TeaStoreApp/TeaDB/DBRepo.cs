@@ -177,7 +177,9 @@ namespace TeaDB
                 OrderModel order = new OrderModel()
                 {
                     locationId = locationId,
-                    customerId = customerId
+                    customerId = customerId,
+                    totalPrice = Convert.ToDecimal(0.00),
+                    complete = false
                 };
                 CreateNewBasket(order);
                 return mapper.ParseOrder(
