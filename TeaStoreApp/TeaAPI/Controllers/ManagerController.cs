@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TeaLib;
 using TeaDB.Models;
+using Microsoft.Extensions.Logging;
 
 namespace TeaAPI.Controllers
 {
@@ -13,9 +14,11 @@ namespace TeaAPI.Controllers
     public class ManagerController : Controller
     {
         readonly ManagerService managerService;
-        public ManagerController()
+        readonly ILogger<BasketController> logger;
+        public ManagerController(ILogger<BasketController> logger)
         {
             managerService = new ManagerService();
+            this.logger = logger;
         }
 
         [HttpGet("get/location/{id}")]
@@ -41,6 +44,7 @@ namespace TeaAPI.Controllers
             try
             {
                 managerService.ReplenishStock(inventory);
+                logger.LogInformation($"Stock replenished locationId: {inventory.locationId} productId: {inventory.productId}");
                 return CreatedAtAction("ReplenishStock", inventory);
             }
             catch (Exception)

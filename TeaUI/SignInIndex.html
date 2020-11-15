@@ -60,11 +60,11 @@
                 </div>
                 <br>
                 <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="text" class="form-control" id="email" placeholder="Enter Email">
+                    <label for="newemail">Email:</label>
+                    <input type="email" class="form-control"  id="newemail" placeholder="Enter Email" required>
                 </div>
                 <br>
-                <input type="button" value="Register" onclick="AddCustomer()">
+                <input type="submit" value="Register" onclick="AddCustomer()">
             </form>
         </div>
     
@@ -76,10 +76,10 @@
                 <br>
                 <div class="form-group">
                     <label for="userEmail">Email:</label>
-                    <input type="text" class="form-control" id="userEmail" placeholder="Enter Email">
+                    <input type="text" class="form-control" pattern="[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}"  id="userEmail" placeholder="Enter Email">
                 </div>
                 <br>
-                <input type="button" value="Enter"  onclick="GetCustomerInfo()">
+                <input type="submit" value="Enter"  onclick="GetCustomerInfo()">
             </form>     
         </div>
         <br>

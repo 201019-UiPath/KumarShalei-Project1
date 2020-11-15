@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TeaLib;
 using TeaDB.Models;
+using Serilog;
+using Microsoft.Extensions.Logging;
 
 namespace TeaAPI.Controllers
 {
@@ -12,11 +14,14 @@ namespace TeaAPI.Controllers
     [Route("[Controller]")]
     public class BasketController : Controller
     {
+        private readonly ILogger<BasketController> logger;
         readonly BasketService basketService;
-        public BasketController()
+        public BasketController(ILogger<BasketController> logger)
         {
             basketService = new BasketService();
+            this.logger = logger;
         }
+
 
         [HttpGet("get/product/{id}")]
         [Produces("application/json")]
@@ -92,6 +97,7 @@ namespace TeaAPI.Controllers
             try
             {
                 basketService.PlaceOrder(order);
+                logger.LogInformation($"Order Placed at locationId: {order.locationId}");
                 return CreatedAtAction("PlaceOrder", order);
             }
             catch (Exception)

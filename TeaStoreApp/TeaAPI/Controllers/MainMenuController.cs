@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Cors;
 using TeaDB.Models;
 using TeaLib;
+using Microsoft.Extensions.Logging;
 
 namespace TeaAPI.Controllers
 {
@@ -14,11 +15,13 @@ namespace TeaAPI.Controllers
     
     public class MainMenuController : Controller
     {
+        private readonly ILogger<MainMenuController> logger;
         private readonly MainMenuService mainMenuService;
 
-        public MainMenuController()
+        public MainMenuController(ILogger<MainMenuController> logger)
         {
-            this.mainMenuService = new MainMenuService(); 
+            this.mainMenuService = new MainMenuService();
+            this.logger = logger;
         }
 
         [HttpGet("get/{email}")]
@@ -54,6 +57,24 @@ namespace TeaAPI.Controllers
         }
 
 
+        [HttpGet("get/orders/{id}")]
+        [Produces("application/json")]
+        [Consumes("application/json")]
+        [EnableCors("_myAllowSpecificOrigins")]
+        public IActionResult GetCustomerOrders(int id)
+        {
+            try
+            {
+                return Ok(mainMenuService.GetCustomerOrders(id));
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
+
+
+
         [HttpGet("get/order/most/{id}")]
         [Produces("application/json")]
         [Consumes("application/json")]
@@ -70,6 +91,7 @@ namespace TeaAPI.Controllers
             }
         }
 
+
         [HttpPost("add")]
         [Produces("application/json")]
         [Consumes("application/json")]
@@ -79,7 +101,8 @@ namespace TeaAPI.Controllers
             try
             {
                 mainMenuService.NewCustomer(customer);
-                return CreatedAtAction("NewCustomer",customer);
+                logger.LogInformation("New Customer Added");
+                return CreatedAtAction("NewCustomer", customer);
             }
             catch (Exception)
             {

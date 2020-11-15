@@ -1,0 +1,223 @@
+2020-11-15 13:46:40.894 -05:00 [INF] Now listening on: https://localhost:5001
+2020-11-15 13:46:41.019 -05:00 [INF] Now listening on: http://localhost:5000
+2020-11-15 13:46:41.023 -05:00 [INF] Application started. Press Ctrl+C to shut down.
+2020-11-15 13:46:41.026 -05:00 [INF] Hosting environment: Production
+2020-11-15 13:46:41.029 -05:00 [INF] Content root path: D:\UIPathBatch-P0\KumarShalei-Project1\TeaStoreApp\TeaAPI
+2020-11-15 13:47:01.057 -05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:5001/MainMenu/add  
+2020-11-15 13:47:01.118 -05:00 [INF] CORS policy execution successful.
+2020-11-15 13:47:01.131 -05:00 [INF] Request finished in 74.6557ms 204 
+2020-11-15 13:47:01.137 -05:00 [INF] Request starting HTTP/2 POST https://localhost:5001/MainMenu/add application/json 68
+2020-11-15 13:47:01.150 -05:00 [INF] CORS policy execution successful.
+2020-11-15 13:47:01.158 -05:00 [INF] Executing endpoint 'TeaAPI.Controllers.MainMenuController.NewCustomer (TeaAPI)'
+2020-11-15 13:47:01.197 -05:00 [INF] Route matched with {action = "NewCustomer", controller = "MainMenu"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult NewCustomer(TeaDB.Models.CustomerModel) on controller TeaAPI.Controllers.MainMenuController (TeaAPI).
+2020-11-15 13:47:03.793 -05:00 [INF] New Customer Added
+2020-11-15 13:47:03.807 -05:00 [INF] Executing ObjectResult, writing value of type 'TeaDB.Models.CustomerModel'.
+2020-11-15 13:47:04.190 -05:00 [INF] Executed action TeaAPI.Controllers.MainMenuController.NewCustomer (TeaAPI) in 2972.3823ms
+2020-11-15 13:47:04.217 -05:00 [INF] Executed endpoint 'TeaAPI.Controllers.MainMenuController.NewCustomer (TeaAPI)'
+2020-11-15 13:47:04.228 -05:00 [INF] Request finished in 3090.904ms 201 application/json; charset=utf-8
+2020-11-15 13:47:05.826 -05:00 [INF] Request starting HTTP/2 GET https://localhost:5001/MainMenu/get/skumar2@yahoo.com  
+2020-11-15 13:47:05.907 -05:00 [INF] CORS policy execution successful.
+2020-11-15 13:47:05.933 -05:00 [INF] Executing endpoint 'TeaAPI.Controllers.MainMenuController.GetCustomerInfo (TeaAPI)'
+2020-11-15 13:47:05.950 -05:00 [INF] Route matched with {action = "GetCustomerInfo", controller = "MainMenu"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetCustomerInfo(System.String) on controller TeaAPI.Controllers.MainMenuController (TeaAPI).
+2020-11-15 13:47:06.951 -05:00 [INF] Executing ObjectResult, writing value of type 'TeaDB.Models.CustomerModel'.
+2020-11-15 13:47:06.960 -05:00 [INF] Executed action TeaAPI.Controllers.MainMenuController.GetCustomerInfo (TeaAPI) in 999.9862ms
+2020-11-15 13:47:06.971 -05:00 [INF] Executed endpoint 'TeaAPI.Controllers.MainMenuController.GetCustomerInfo (TeaAPI)'
+2020-11-15 13:47:06.984 -05:00 [INF] Request finished in 1158.0885ms 200 application/json; charset=utf-8
+2020-11-15 13:47:07.146 -05:00 [INF] Request starting HTTP/2 GET https://localhost:5001/MainMenu/get/orders/7  
+2020-11-15 13:47:07.165 -05:00 [INF] CORS policy execution successful.
+2020-11-15 13:47:07.170 -05:00 [INF] Executing endpoint 'TeaAPI.Controllers.MainMenuController.GetCustomerOrders (TeaAPI)'
+2020-11-15 13:47:07.186 -05:00 [INF] Route matched with {action = "GetCustomerOrders", controller = "MainMenu"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetCustomerOrders(Int32) on controller TeaAPI.Controllers.MainMenuController (TeaAPI).
+2020-11-15 13:47:07.277 -05:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[TeaDB.Models.OrderModel, TeaDB, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2020-11-15 13:47:07.284 -05:00 [INF] Executed action TeaAPI.Controllers.MainMenuController.GetCustomerOrders (TeaAPI) in 91.5529ms
+2020-11-15 13:47:07.289 -05:00 [INF] Executed endpoint 'TeaAPI.Controllers.MainMenuController.GetCustomerOrders (TeaAPI)'
+2020-11-15 13:47:07.293 -05:00 [INF] Request finished in 146.8158ms 200 application/json; charset=utf-8
+2020-11-15 13:47:09.892 -05:00 [INF] Request starting HTTP/2 GET https://localhost:5001/Location/get/location/1  
+2020-11-15 13:47:09.896 -05:00 [INF] Request starting HTTP/2 GET https://localhost:5001/Location/get/order/1/7  
+2020-11-15 13:47:09.933 -05:00 [INF] CORS policy execution successful.
+2020-11-15 13:47:09.933 -05:00 [INF] CORS policy execution successful.
+2020-11-15 13:47:09.940 -05:00 [INF] Executing endpoint 'TeaAPI.Controllers.LocationController.GetLocationInventory (TeaAPI)'
+2020-11-15 13:47:09.941 -05:00 [INF] Executing endpoint 'TeaAPI.Controllers.LocationController.GetCurrentOrder (TeaAPI)'
+2020-11-15 13:47:09.961 -05:00 [INF] Route matched with {action = "GetLocationInventory", controller = "Location"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetLocationInventory(Int32) on controller TeaAPI.Controllers.LocationController (TeaAPI).
+2020-11-15 13:47:09.962 -05:00 [INF] Route matched with {action = "GetCurrentOrder", controller = "Location"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetCurrentOrder(Int32, Int32) on controller TeaAPI.Controllers.LocationController (TeaAPI).
+2020-11-15 13:47:10.118 -05:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[TeaDB.Models.ProductModel, TeaDB, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2020-11-15 13:47:10.137 -05:00 [INF] Executed action TeaAPI.Controllers.LocationController.GetLocationInventory (TeaAPI) in 164.2618ms
+2020-11-15 13:47:10.147 -05:00 [INF] Executed endpoint 'TeaAPI.Controllers.LocationController.GetLocationInventory (TeaAPI)'
+2020-11-15 13:47:10.153 -05:00 [INF] Request finished in 261.9782ms 200 application/json; charset=utf-8
+2020-11-15 13:47:10.445 -05:00 [INF] Executing ObjectResult, writing value of type 'TeaDB.Models.OrderModel'.
+2020-11-15 13:47:10.453 -05:00 [INF] Executed action TeaAPI.Controllers.LocationController.GetCurrentOrder (TeaAPI) in 474.2293ms
+2020-11-15 13:47:10.459 -05:00 [INF] Executed endpoint 'TeaAPI.Controllers.LocationController.GetCurrentOrder (TeaAPI)'
+2020-11-15 13:47:10.462 -05:00 [INF] Request finished in 573.1471ms 200 application/json; charset=utf-8
+2020-11-15 13:47:11.212 -05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:5001/Location/add/basketitem  
+2020-11-15 13:47:11.236 -05:00 [INF] CORS policy execution successful.
+2020-11-15 13:47:11.241 -05:00 [INF] Request finished in 31.3714ms 204 
+2020-11-15 13:47:11.251 -05:00 [INF] Request starting HTTP/2 POST https://localhost:5001/Location/add/basketitem application/json 57
+2020-11-15 13:47:11.255 -05:00 [INF] CORS policy execution successful.
+2020-11-15 13:47:11.261 -05:00 [INF] Executing endpoint 'TeaAPI.Controllers.LocationController.AddToBasket (TeaAPI)'
+2020-11-15 13:47:11.283 -05:00 [INF] Route matched with {action = "AddToBasket", controller = "Location"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult AddToBasket(TeaDB.Models.OrderItemModel) on controller TeaAPI.Controllers.LocationController (TeaAPI).
+2020-11-15 13:47:11.384 -05:00 [INF] Executing ObjectResult, writing value of type 'TeaDB.Models.OrderItemModel'.
+2020-11-15 13:47:11.392 -05:00 [INF] Executed action TeaAPI.Controllers.LocationController.AddToBasket (TeaAPI) in 105.93ms
+2020-11-15 13:47:11.397 -05:00 [INF] Executed endpoint 'TeaAPI.Controllers.LocationController.AddToBasket (TeaAPI)'
+2020-11-15 13:47:11.404 -05:00 [INF] Request finished in 153.1303ms 201 application/json; charset=utf-8
+2020-11-15 13:47:11.415 -05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:5001/Location/edit/totalprice  
+2020-11-15 13:47:11.421 -05:00 [INF] CORS policy execution successful.
+2020-11-15 13:47:11.427 -05:00 [INF] Request finished in 11.5078ms 204 
+2020-11-15 13:47:11.433 -05:00 [INF] Request starting HTTP/2 PUT https://localhost:5001/Location/edit/totalprice application/json 57
+2020-11-15 13:47:11.437 -05:00 [INF] CORS policy execution successful.
+2020-11-15 13:47:11.440 -05:00 [INF] Executing endpoint 'TeaAPI.Controllers.LocationController.IncreaseTotalPrice (TeaAPI)'
+2020-11-15 13:47:11.445 -05:00 [INF] Route matched with {action = "IncreaseTotalPrice", controller = "Location"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult IncreaseTotalPrice(TeaDB.Models.OrderModel) on controller TeaAPI.Controllers.LocationController (TeaAPI).
+2020-11-15 13:47:11.568 -05:00 [INF] Executing ObjectResult, writing value of type 'TeaDB.Models.OrderModel'.
+2020-11-15 13:47:11.576 -05:00 [INF] Executed action TeaAPI.Controllers.LocationController.IncreaseTotalPrice (TeaAPI) in 125.374ms
+2020-11-15 13:47:11.580 -05:00 [INF] Executed endpoint 'TeaAPI.Controllers.LocationController.IncreaseTotalPrice (TeaAPI)'
+2020-11-15 13:47:11.584 -05:00 [INF] Request finished in 151.2155ms 201 application/json; charset=utf-8
+2020-11-15 13:47:11.595 -05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:5001/Basket/put/stock  
+2020-11-15 13:47:11.600 -05:00 [INF] CORS policy execution successful.
+2020-11-15 13:47:11.604 -05:00 [INF] Request finished in 8.9977ms 204 
+2020-11-15 13:47:11.615 -05:00 [INF] Request starting HTTP/2 PUT https://localhost:5001/Basket/put/stock application/json 40
+2020-11-15 13:47:11.627 -05:00 [INF] CORS policy execution successful.
+2020-11-15 13:47:11.630 -05:00 [INF] Executing endpoint 'TeaAPI.Controllers.BasketController.DecreaseStock (TeaAPI)'
+2020-11-15 13:47:11.640 -05:00 [INF] Route matched with {action = "DecreaseStock", controller = "Basket"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult DecreaseStock(TeaDB.Models.InventoryModel) on controller TeaAPI.Controllers.BasketController (TeaAPI).
+2020-11-15 13:47:11.786 -05:00 [INF] Executing ObjectResult, writing value of type 'TeaDB.Models.InventoryModel'.
+2020-11-15 13:47:11.793 -05:00 [INF] Executed action TeaAPI.Controllers.BasketController.DecreaseStock (TeaAPI) in 144.8134ms
+2020-11-15 13:47:11.800 -05:00 [INF] Executed endpoint 'TeaAPI.Controllers.BasketController.DecreaseStock (TeaAPI)'
+2020-11-15 13:47:11.806 -05:00 [INF] Request finished in 191.3448ms 201 application/json; charset=utf-8
+2020-11-15 13:47:11.901 -05:00 [INF] Request starting HTTP/2 GET https://localhost:5001/Location/get/order/1/7  
+2020-11-15 13:47:11.951 -05:00 [INF] Request starting HTTP/2 GET https://localhost:5001/Location/get/location/1  
+2020-11-15 13:47:11.983 -05:00 [INF] CORS policy execution successful.
+2020-11-15 13:47:11.983 -05:00 [INF] CORS policy execution successful.
+2020-11-15 13:47:12.006 -05:00 [INF] Executing endpoint 'TeaAPI.Controllers.LocationController.GetLocationInventory (TeaAPI)'
+2020-11-15 13:47:12.017 -05:00 [INF] Executing endpoint 'TeaAPI.Controllers.LocationController.GetCurrentOrder (TeaAPI)'
+2020-11-15 13:47:12.018 -05:00 [INF] Route matched with {action = "GetLocationInventory", controller = "Location"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetLocationInventory(Int32) on controller TeaAPI.Controllers.LocationController (TeaAPI).
+2020-11-15 13:47:12.044 -05:00 [INF] Route matched with {action = "GetCurrentOrder", controller = "Location"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetCurrentOrder(Int32, Int32) on controller TeaAPI.Controllers.LocationController (TeaAPI).
+2020-11-15 13:47:12.089 -05:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[TeaDB.Models.ProductModel, TeaDB, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2020-11-15 13:47:12.092 -05:00 [INF] Executing ObjectResult, writing value of type 'TeaDB.Models.OrderModel'.
+2020-11-15 13:47:12.104 -05:00 [INF] Executed action TeaAPI.Controllers.LocationController.GetLocationInventory (TeaAPI) in 59.7629ms
+2020-11-15 13:47:12.104 -05:00 [INF] Executed action TeaAPI.Controllers.LocationController.GetCurrentOrder (TeaAPI) in 54.6795ms
+2020-11-15 13:47:12.113 -05:00 [INF] Executed endpoint 'TeaAPI.Controllers.LocationController.GetLocationInventory (TeaAPI)'
+2020-11-15 13:47:12.115 -05:00 [INF] Executed endpoint 'TeaAPI.Controllers.LocationController.GetCurrentOrder (TeaAPI)'
+2020-11-15 13:47:12.122 -05:00 [INF] Request finished in 169.8655ms 200 application/json; charset=utf-8
+2020-11-15 13:47:12.129 -05:00 [INF] Request finished in 227.9369ms 200 application/json; charset=utf-8
+2020-11-15 13:47:12.290 -05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:5001/Location/add/basketitem  
+2020-11-15 13:47:12.301 -05:00 [INF] CORS policy execution successful.
+2020-11-15 13:47:12.311 -05:00 [INF] Request finished in 20.5124ms 204 
+2020-11-15 13:47:12.318 -05:00 [INF] Request starting HTTP/2 POST https://localhost:5001/Location/add/basketitem application/json 58
+2020-11-15 13:47:12.323 -05:00 [INF] CORS policy execution successful.
+2020-11-15 13:47:12.331 -05:00 [INF] Executing endpoint 'TeaAPI.Controllers.LocationController.AddToBasket (TeaAPI)'
+2020-11-15 13:47:12.338 -05:00 [INF] Route matched with {action = "AddToBasket", controller = "Location"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult AddToBasket(TeaDB.Models.OrderItemModel) on controller TeaAPI.Controllers.LocationController (TeaAPI).
+2020-11-15 13:47:12.419 -05:00 [INF] Executing ObjectResult, writing value of type 'TeaDB.Models.OrderItemModel'.
+2020-11-15 13:47:12.425 -05:00 [INF] Executed action TeaAPI.Controllers.LocationController.AddToBasket (TeaAPI) in 79.9074ms
+2020-11-15 13:47:12.429 -05:00 [INF] Executed endpoint 'TeaAPI.Controllers.LocationController.AddToBasket (TeaAPI)'
+2020-11-15 13:47:12.432 -05:00 [INF] Request finished in 114.0633ms 201 application/json; charset=utf-8
+2020-11-15 13:47:12.443 -05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:5001/Location/edit/totalprice  
+2020-11-15 13:47:12.447 -05:00 [INF] CORS policy execution successful.
+2020-11-15 13:47:12.451 -05:00 [INF] Request finished in 7.6601ms 204 
+2020-11-15 13:47:12.456 -05:00 [INF] Request starting HTTP/2 PUT https://localhost:5001/Location/edit/totalprice application/json 58
+2020-11-15 13:47:12.460 -05:00 [INF] CORS policy execution successful.
+2020-11-15 13:47:12.465 -05:00 [INF] Executing endpoint 'TeaAPI.Controllers.LocationController.IncreaseTotalPrice (TeaAPI)'
+2020-11-15 13:47:12.470 -05:00 [INF] Route matched with {action = "IncreaseTotalPrice", controller = "Location"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult IncreaseTotalPrice(TeaDB.Models.OrderModel) on controller TeaAPI.Controllers.LocationController (TeaAPI).
+2020-11-15 13:47:12.583 -05:00 [INF] Executing ObjectResult, writing value of type 'TeaDB.Models.OrderModel'.
+2020-11-15 13:47:12.587 -05:00 [INF] Executed action TeaAPI.Controllers.LocationController.IncreaseTotalPrice (TeaAPI) in 108.4071ms
+2020-11-15 13:47:12.593 -05:00 [INF] Executed endpoint 'TeaAPI.Controllers.LocationController.IncreaseTotalPrice (TeaAPI)'
+2020-11-15 13:47:12.597 -05:00 [INF] Request finished in 141.3895ms 201 application/json; charset=utf-8
+2020-11-15 13:47:12.609 -05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:5001/Basket/put/stock  
+2020-11-15 13:47:12.612 -05:00 [INF] CORS policy execution successful.
+2020-11-15 13:47:12.617 -05:00 [INF] Request finished in 8.217ms 204 
+2020-11-15 13:47:12.625 -05:00 [INF] Request starting HTTP/2 PUT https://localhost:5001/Basket/put/stock application/json 40
+2020-11-15 13:47:12.629 -05:00 [INF] CORS policy execution successful.
+2020-11-15 13:47:12.632 -05:00 [INF] Executing endpoint 'TeaAPI.Controllers.BasketController.DecreaseStock (TeaAPI)'
+2020-11-15 13:47:12.635 -05:00 [INF] Route matched with {action = "DecreaseStock", controller = "Basket"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult DecreaseStock(TeaDB.Models.InventoryModel) on controller TeaAPI.Controllers.BasketController (TeaAPI).
+2020-11-15 13:47:12.749 -05:00 [INF] Executing ObjectResult, writing value of type 'TeaDB.Models.InventoryModel'.
+2020-11-15 13:47:12.753 -05:00 [INF] Executed action TeaAPI.Controllers.BasketController.DecreaseStock (TeaAPI) in 111.6721ms
+2020-11-15 13:47:12.757 -05:00 [INF] Executed endpoint 'TeaAPI.Controllers.BasketController.DecreaseStock (TeaAPI)'
+2020-11-15 13:47:12.761 -05:00 [INF] Request finished in 136.0454ms 201 application/json; charset=utf-8
+2020-11-15 13:47:12.778 -05:00 [INF] Request starting HTTP/2 GET https://localhost:5001/Location/get/order/1/7  
+2020-11-15 13:47:12.782 -05:00 [INF] Request starting HTTP/2 GET https://localhost:5001/Location/get/location/1  
+2020-11-15 13:47:12.788 -05:00 [INF] CORS policy execution successful.
+2020-11-15 13:47:12.788 -05:00 [INF] CORS policy execution successful.
+2020-11-15 13:47:12.798 -05:00 [INF] Executing endpoint 'TeaAPI.Controllers.LocationController.GetCurrentOrder (TeaAPI)'
+2020-11-15 13:47:12.798 -05:00 [INF] Executing endpoint 'TeaAPI.Controllers.LocationController.GetLocationInventory (TeaAPI)'
+2020-11-15 13:47:12.802 -05:00 [INF] Route matched with {action = "GetCurrentOrder", controller = "Location"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetCurrentOrder(Int32, Int32) on controller TeaAPI.Controllers.LocationController (TeaAPI).
+2020-11-15 13:47:12.806 -05:00 [INF] Route matched with {action = "GetLocationInventory", controller = "Location"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetLocationInventory(Int32) on controller TeaAPI.Controllers.LocationController (TeaAPI).
+2020-11-15 13:47:12.848 -05:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[TeaDB.Models.ProductModel, TeaDB, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2020-11-15 13:47:12.854 -05:00 [INF] Executing ObjectResult, writing value of type 'TeaDB.Models.OrderModel'.
+2020-11-15 13:47:12.855 -05:00 [INF] Executed action TeaAPI.Controllers.LocationController.GetLocationInventory (TeaAPI) in 39.9529ms
+2020-11-15 13:47:12.864 -05:00 [INF] Executed action TeaAPI.Controllers.LocationController.GetCurrentOrder (TeaAPI) in 52.6784ms
+2020-11-15 13:47:12.865 -05:00 [INF] Executed endpoint 'TeaAPI.Controllers.LocationController.GetLocationInventory (TeaAPI)'
+2020-11-15 13:47:12.869 -05:00 [INF] Executed endpoint 'TeaAPI.Controllers.LocationController.GetCurrentOrder (TeaAPI)'
+2020-11-15 13:47:12.877 -05:00 [INF] Request finished in 95.2268ms 200 application/json; charset=utf-8
+2020-11-15 13:47:12.877 -05:00 [INF] Request finished in 99.1402ms 200 application/json; charset=utf-8
+2020-11-15 13:47:14.092 -05:00 [INF] Request starting HTTP/2 GET https://localhost:5001/Location/get/order/1/7  
+2020-11-15 13:47:14.103 -05:00 [INF] CORS policy execution successful.
+2020-11-15 13:47:14.115 -05:00 [INF] Executing endpoint 'TeaAPI.Controllers.LocationController.GetCurrentOrder (TeaAPI)'
+2020-11-15 13:47:14.120 -05:00 [INF] Route matched with {action = "GetCurrentOrder", controller = "Location"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetCurrentOrder(Int32, Int32) on controller TeaAPI.Controllers.LocationController (TeaAPI).
+2020-11-15 13:47:14.165 -05:00 [INF] Executing ObjectResult, writing value of type 'TeaDB.Models.OrderModel'.
+2020-11-15 13:47:14.169 -05:00 [INF] Executed action TeaAPI.Controllers.LocationController.GetCurrentOrder (TeaAPI) in 41.8929ms
+2020-11-15 13:47:14.175 -05:00 [INF] Executed endpoint 'TeaAPI.Controllers.LocationController.GetCurrentOrder (TeaAPI)'
+2020-11-15 13:47:14.179 -05:00 [INF] Request starting HTTP/2 GET https://localhost:5001/Location/get/order/1/7  
+2020-11-15 13:47:14.179 -05:00 [INF] Request finished in 87.9028ms 200 application/json; charset=utf-8
+2020-11-15 13:47:14.186 -05:00 [INF] CORS policy execution successful.
+2020-11-15 13:47:14.191 -05:00 [INF] Executing endpoint 'TeaAPI.Controllers.LocationController.GetCurrentOrder (TeaAPI)'
+2020-11-15 13:47:14.195 -05:00 [INF] Route matched with {action = "GetCurrentOrder", controller = "Location"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetCurrentOrder(Int32, Int32) on controller TeaAPI.Controllers.LocationController (TeaAPI).
+2020-11-15 13:47:14.231 -05:00 [INF] Executing ObjectResult, writing value of type 'TeaDB.Models.OrderModel'.
+2020-11-15 13:47:14.236 -05:00 [INF] Executed action TeaAPI.Controllers.LocationController.GetCurrentOrder (TeaAPI) in 36.2678ms
+2020-11-15 13:47:14.240 -05:00 [INF] Executed endpoint 'TeaAPI.Controllers.LocationController.GetCurrentOrder (TeaAPI)'
+2020-11-15 13:47:14.244 -05:00 [INF] Request finished in 65.2251ms 200 application/json; charset=utf-8
+2020-11-15 13:47:15.228 -05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:5001/Basket/put/basketorder/  
+2020-11-15 13:47:15.233 -05:00 [INF] CORS policy execution successful.
+2020-11-15 13:47:15.238 -05:00 [INF] Request finished in 9.689ms 204 
+2020-11-15 13:47:15.250 -05:00 [INF] Request starting HTTP/2 PUT https://localhost:5001/Basket/put/basketorder/ application/json 25
+2020-11-15 13:47:15.255 -05:00 [INF] CORS policy execution successful.
+2020-11-15 13:47:15.260 -05:00 [INF] Executing endpoint 'TeaAPI.Controllers.BasketController.PlaceOrder (TeaAPI)'
+2020-11-15 13:47:15.266 -05:00 [INF] Route matched with {action = "PlaceOrder", controller = "Basket"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult PlaceOrder(TeaDB.Models.OrderModel) on controller TeaAPI.Controllers.BasketController (TeaAPI).
+2020-11-15 13:47:15.386 -05:00 [INF] Order Placed at locationId: 0
+2020-11-15 13:47:15.390 -05:00 [INF] Executing ObjectResult, writing value of type 'TeaDB.Models.OrderModel'.
+2020-11-15 13:47:15.395 -05:00 [INF] Executed action TeaAPI.Controllers.BasketController.PlaceOrder (TeaAPI) in 124.2208ms
+2020-11-15 13:47:15.399 -05:00 [INF] Executed endpoint 'TeaAPI.Controllers.BasketController.PlaceOrder (TeaAPI)'
+2020-11-15 13:47:15.403 -05:00 [INF] Request finished in 152.537ms 201 application/json; charset=utf-8
+2020-11-15 13:47:16.505 -05:00 [INF] Request starting HTTP/2 GET https://localhost:5001/Location/get/order/1/7  
+2020-11-15 13:47:16.527 -05:00 [INF] CORS policy execution successful.
+2020-11-15 13:47:16.533 -05:00 [INF] Executing endpoint 'TeaAPI.Controllers.LocationController.GetCurrentOrder (TeaAPI)'
+2020-11-15 13:47:16.555 -05:00 [INF] Route matched with {action = "GetCurrentOrder", controller = "Location"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetCurrentOrder(Int32, Int32) on controller TeaAPI.Controllers.LocationController (TeaAPI).
+2020-11-15 13:47:16.681 -05:00 [INF] Request starting HTTP/2 GET https://localhost:5001/Location/get/location/1  
+2020-11-15 13:47:16.681 -05:00 [INF] Request starting HTTP/2 GET https://localhost:5001/Location/get/order/1/7  
+2020-11-15 13:47:16.686 -05:00 [INF] CORS policy execution successful.
+2020-11-15 13:47:16.687 -05:00 [INF] CORS policy execution successful.
+2020-11-15 13:47:16.692 -05:00 [INF] Executing endpoint 'TeaAPI.Controllers.LocationController.GetLocationInventory (TeaAPI)'
+2020-11-15 13:47:16.693 -05:00 [INF] Executing endpoint 'TeaAPI.Controllers.LocationController.GetCurrentOrder (TeaAPI)'
+2020-11-15 13:47:16.700 -05:00 [INF] Route matched with {action = "GetLocationInventory", controller = "Location"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetLocationInventory(Int32) on controller TeaAPI.Controllers.LocationController (TeaAPI).
+2020-11-15 13:47:16.700 -05:00 [INF] Route matched with {action = "GetCurrentOrder", controller = "Location"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetCurrentOrder(Int32, Int32) on controller TeaAPI.Controllers.LocationController (TeaAPI).
+2020-11-15 13:47:16.746 -05:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[TeaDB.Models.ProductModel, TeaDB, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2020-11-15 13:47:16.752 -05:00 [INF] Executed action TeaAPI.Controllers.LocationController.GetLocationInventory (TeaAPI) in 48.1265ms
+2020-11-15 13:47:16.757 -05:00 [INF] Executed endpoint 'TeaAPI.Controllers.LocationController.GetLocationInventory (TeaAPI)'
+2020-11-15 13:47:16.761 -05:00 [INF] Request finished in 80.0365ms 200 application/json; charset=utf-8
+2020-11-15 13:47:16.785 -05:00 [INF] Executing ObjectResult, writing value of type 'TeaDB.Models.OrderModel'.
+2020-11-15 13:47:16.790 -05:00 [INF] Executed action TeaAPI.Controllers.LocationController.GetCurrentOrder (TeaAPI) in 221.4165ms
+2020-11-15 13:47:16.797 -05:00 [INF] Executed endpoint 'TeaAPI.Controllers.LocationController.GetCurrentOrder (TeaAPI)'
+2020-11-15 13:47:16.800 -05:00 [INF] Request finished in 294.4938ms 200 application/json; charset=utf-8
+2020-11-15 13:47:16.914 -05:00 [INF] Executing ObjectResult, writing value of type 'TeaDB.Models.OrderModel'.
+2020-11-15 13:47:16.919 -05:00 [INF] Executed action TeaAPI.Controllers.LocationController.GetCurrentOrder (TeaAPI) in 211.6231ms
+2020-11-15 13:47:16.923 -05:00 [INF] Executed endpoint 'TeaAPI.Controllers.LocationController.GetCurrentOrder (TeaAPI)'
+2020-11-15 13:47:16.928 -05:00 [INF] Request finished in 247.1722ms 200 application/json; charset=utf-8
+2020-11-15 13:47:17.501 -05:00 [INF] Request starting HTTP/2 GET https://localhost:5001/MainMenu/get/orders/7  
+2020-11-15 13:47:17.511 -05:00 [INF] CORS policy execution successful.
+2020-11-15 13:47:17.516 -05:00 [INF] Executing endpoint 'TeaAPI.Controllers.MainMenuController.GetCustomerOrders (TeaAPI)'
+2020-11-15 13:47:17.526 -05:00 [INF] Route matched with {action = "GetCustomerOrders", controller = "MainMenu"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetCustomerOrders(Int32) on controller TeaAPI.Controllers.MainMenuController (TeaAPI).
+2020-11-15 13:47:17.576 -05:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[TeaDB.Models.OrderModel, TeaDB, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2020-11-15 13:47:17.581 -05:00 [INF] Executed action TeaAPI.Controllers.MainMenuController.GetCustomerOrders (TeaAPI) in 49.5684ms
+2020-11-15 13:47:17.586 -05:00 [INF] Executed endpoint 'TeaAPI.Controllers.MainMenuController.GetCustomerOrders (TeaAPI)'
+2020-11-15 13:47:17.590 -05:00 [INF] Request finished in 88.4912ms 200 application/json; charset=utf-8
+2020-11-15 13:47:17.604 -05:00 [INF] Request starting HTTP/2 GET https://localhost:5001/Location/get/product/1  
+2020-11-15 13:47:17.604 -05:00 [INF] Request starting HTTP/2 GET https://localhost:5001/Location/get/product/2  
+2020-11-15 13:47:17.612 -05:00 [INF] CORS policy execution successful.
+2020-11-15 13:47:17.616 -05:00 [INF] CORS policy execution successful.
+2020-11-15 13:47:17.616 -05:00 [INF] Executing endpoint 'TeaAPI.Controllers.LocationController.GetProduct (TeaAPI)'
+2020-11-15 13:47:17.622 -05:00 [INF] Executing endpoint 'TeaAPI.Controllers.LocationController.GetProduct (TeaAPI)'
+2020-11-15 13:47:17.628 -05:00 [INF] Route matched with {action = "GetProduct", controller = "Location"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetProduct(Int32) on controller TeaAPI.Controllers.LocationController (TeaAPI).
+2020-11-15 13:47:17.629 -05:00 [INF] Route matched with {action = "GetProduct", controller = "Location"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetProduct(Int32) on controller TeaAPI.Controllers.LocationController (TeaAPI).
+2020-11-15 13:47:17.683 -05:00 [INF] Executing ObjectResult, writing value of type 'TeaDB.Models.ProductModel'.
+2020-11-15 13:47:17.683 -05:00 [INF] Executing ObjectResult, writing value of type 'TeaDB.Models.ProductModel'.
+2020-11-15 13:47:17.691 -05:00 [INF] Executed action TeaAPI.Controllers.LocationController.GetProduct (TeaAPI) in 55.4302ms
+2020-11-15 13:47:17.691 -05:00 [INF] Executed action TeaAPI.Controllers.LocationController.GetProduct (TeaAPI) in 58.5421ms
+2020-11-15 13:47:17.701 -05:00 [INF] Executed endpoint 'TeaAPI.Controllers.LocationController.GetProduct (TeaAPI)'
+2020-11-15 13:47:17.701 -05:00 [INF] Executed endpoint 'TeaAPI.Controllers.LocationController.GetProduct (TeaAPI)'
+2020-11-15 13:47:17.707 -05:00 [INF] Request finished in 103.273ms 200 application/json; charset=utf-8
+2020-11-15 13:47:17.707 -05:00 [INF] Request finished in 103.5398ms 200 application/json; charset=utf-8

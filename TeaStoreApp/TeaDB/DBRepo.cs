@@ -30,11 +30,18 @@ namespace TeaDB
 
         public CustomerModel GetCustomerInfo(string email)
         {
-            return mapper.ParseCustomer(
-                context.Customers
-                .Include("Orders")
-                .First(c => c.Customeremail == email )
-            );
+            try
+            {
+                return mapper.ParseCustomer(
+                    context.Customers
+                    .Include("Orders")
+                    .First(c => c.Customeremail == email)
+                );
+            }
+            catch (InvalidOperationException)
+            {
+                return new CustomerModel();
+            }
         }
 
         public List<OrderModel> GetCustomerOrderLeastToMost(int id)
@@ -43,6 +50,16 @@ namespace TeaDB
                 context.Orders
                 .Where(o => o.Customerid == id && o.Payed == true)
                 .OrderBy(o=> o.Totalprice)
+                .Include("Orderitems")
+                .ToList()
+            );
+        }
+
+        public List<OrderModel> GetCustomerOrders(int id)
+        {
+            return mapper.ParseOrder(
+                context.Orders
+                .Where(o => o.Customerid == id && o.Payed == true)
                 .Include("Orderitems")
                 .ToList()
             );
@@ -155,7 +172,7 @@ namespace TeaDB
                     .Include("Orderitems")
                     .First(o => o.Customerid == customerId && o.Locationid == locationId && o.Payed == false)
                 );
-            } catch (Exception)
+            } catch (InvalidOperationException)
             {
                 OrderModel order = new OrderModel()
                 {

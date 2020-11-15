@@ -36,6 +36,11 @@ namespace TeaLib
             return repo.GetCustomerOrderMostToLeast(id);
         }
 
+        public List<OrderModel> GetCustomerOrders(int id)
+        {
+            return repo.GetCustomerOrders(id);
+        }
+
 
     }
 

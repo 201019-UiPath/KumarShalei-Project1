@@ -22,11 +22,14 @@ function GetLocationOrders(id){
 
             let hCell = row.insertCell(3);
             for (let j = 0; j < result[i].orderItems.length; ++j){
-                hCell.innerHTML += result[i].orderItems[j].productId;
+                fetch('https://localhost:5001/Location/get/product/' + result[i].orderItems[j].productId)
+                .then(result => result.json())
+                .then(result => hCell.innerHTML += result.name + " ");
             }
         }
         
     });
+
 }
 
 
@@ -53,11 +56,15 @@ function LeastToMost(){
 
             let hCell = row.insertCell(3);
             for (let j = 0; j < result[i].orderItems.length; ++j){
-                hCell.innerHTML += result[i].orderItems[j].productId;
+                fetch('https://localhost:5001/Location/get/product/' + result[i].orderItems[j].productId)
+                .then(result => result.json())
+                .then(result => hCell.innerHTML += result.name + " ");
             }
         }
         
     });
+
+    
 }
 
 
@@ -82,11 +89,9 @@ function MostToLeast(){
             let pCell = row.insertCell(2);
             pCell.innerHTML = result[i].totalPrice;
 
-            let hCell = row.insertCell(3);
-            for (let j = 0; j < result[i].orderItems.length; ++j){
-                hCell.innerHTML += result[i].orderItems[j].productId;
-            }
+            
         }
         
     });
 }
+
