@@ -20,9 +20,9 @@ namespace TeaLib
         {
             return repo.GetLocationInventory(locationId);
         }
-        public void ReplenishStock(InventoryModel inventory, int amount)
+        public void ReplenishStock(InventoryModel inventory)
         {
-            repo.ReplenishStock(inventory, amount);
+            repo.ReplenishStock(inventory);
         }
         public List<OrderModel> GetOrderHistoryLocationByMostExpensive(int locationid)
         {

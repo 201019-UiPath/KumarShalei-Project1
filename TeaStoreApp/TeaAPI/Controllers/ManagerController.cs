@@ -36,12 +36,12 @@ namespace TeaAPI.Controllers
         [HttpPut("put/location")]
         [Produces("application/json")]
         [Consumes("application/json")]
-        public IActionResult ReplenishStock(InventoryModel inventory, int amount)
+        public IActionResult ReplenishStock(InventoryModel inventory)
         {
             try
             {
-                managerService.ReplenishStock(inventory, amount);
-                return CreatedAtAction("DeleteFromBasket", inventory, amount);
+                managerService.ReplenishStock(inventory);
+                return CreatedAtAction("ReplenishStock", inventory);
             }
             catch (Exception)
             {

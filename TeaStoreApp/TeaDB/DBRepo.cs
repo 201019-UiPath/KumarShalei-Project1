@@ -62,9 +62,9 @@ namespace TeaDB
 
 
 
-        public void ReplenishStock(InventoryModel inventory, int amount)
+        public void ReplenishStock(InventoryModel inventory)
         {
-            context.Inventory.First(i => i.Locationid == inventory.locationId && i.Productid == inventory.productId).Stock += amount;
+            context.Inventory.First(i => i.Locationid == inventory.locationId && i.Productid == inventory.productId).Stock += inventory.stock;
             context.SaveChanges();
         }
 

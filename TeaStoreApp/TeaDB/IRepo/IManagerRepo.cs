@@ -9,7 +9,7 @@ namespace TeaDB.IRepo
     public interface IManagerRepo
     {
         LocationModel GetLocationInventory(int locationId);
-        void ReplenishStock(InventoryModel inventory, int amount);
+        void ReplenishStock(InventoryModel inventory);
         List<OrderModel> GetOrderHistoryLocationByMostExpensive(int locationid);
         List<OrderModel> GetOrderHistoryLocationByLeastExpensive(int locationid);
         List<OrderModel> GetLocationOrderHistory(int id);
