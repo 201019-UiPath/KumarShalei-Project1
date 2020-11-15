@@ -137,6 +137,16 @@ function AddtoBasket(productid, i){
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(order));
 
+
+    let stock = {};
+    stock.locationId = parseInt(localStorage.getItem('locationId'));
+    stock.productId = productid;
+    stock.stock = 1;
+
+    xhr.open("PUT", 'https://localhost:5001/Basket/put/stock', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(stock));
+    GetLocationInventory();
 }
 
 
@@ -154,6 +164,7 @@ function CreateBasket(){
     xhr.open("POST", 'https://localhost:5001/Location/add/basket', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(basket));
+    GetOrderId();
     
 }
 
@@ -165,14 +176,21 @@ function GetOrderId(){
 
     fetch(url)
     .then(result => result.json())
-    .then(result => localStorage.setItem('orderTotalPrice',parseFloat(result.totalPrice)) & localStorage.setItem('orderId', parseInt(result.id)));
-    
+    .then(result => 
+        {if(result.status == 404){
+            CreateBasket();
+        } else{
+            result => localStorage.setItem('orderTotalPrice',parseFloat(result.totalPrice))& localStorage.setItem('orderId', parseInt(result.id));
+        }
         
+    });
+    alert(localStorage.getItem('orderTotalPrice'));
     
 }
 
 
 function ViewBasketItem(){
+    GetOrderId();
     let locationid = localStorage.getItem('locationId');
     let customerid = localStorage.getItem('customerId');
     let url = 'https://localhost:5001/Location/get/order/' + locationid + '/' + customerid;
@@ -204,6 +222,18 @@ function ViewBasketItem(){
 
 function PlaceOrder(){
 
+    let order = {};
+    order.id = parseInt(localStorage.getItem('orderId'));
+    order.complete = true;
+
+
+    let xhr = new XMLHttpRequest();
+    if(this.readyState == 4 && this.status > 199 && this.status < 300) {
+        alert('OrderPlaced!')
+    }
+    xhr.open("PUT", 'https://localhost:5001/Basket/put/basketorder/', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(order));
 
 }
 
@@ -234,50 +264,47 @@ function CustomerOrders(){
 }
 
 function CustomerOrderLeastToMost(){
-    let url = 'https://localhost:5001/MainMenu/get/order/least/' + localStorage.getItem('customerEmail');
+    let url = 'https://localhost:5001/MainMenu/get/order/least/' + localStorage.getItem('customerId');
     fetch(url)
     .then(response => response.json())
     .then(result => {
         document.querySelectorAll('#customerorderlist tbody tr').forEach(element => element.remove());
         let table = document.querySelector('#customerorderlist tbody');
-        for(let i = 0; i < result.orders.length; ++i)
+        for(let i = 0; i < result.length; ++i)
         {
-            if(result.orders[i].complete == true){
+            let row = table.insertRow(table.rows.length);
+
+            let rnCell = row.insertCell(0);
+            rnCell.innerHTML = result[i].id;
+
+            let aCell = row.insertCell(1);
+            aCell.innerHTML = result[i].totalPrice;
+
             
-                let row = table.insertRow(table.rows.length);
-
-                let rnCell = row.insertCell(0);
-                rnCell.innerHTML = result.orders[i].id;
-
-                let aCell = row.insertCell(1);
-                aCell.innerHTML = result.orders[i].totalPrice;
-
-            }
         }
         
     });
 }
 
 function CustomerOrderMostToLeast(){
-    let url = 'https://localhost:5001/MainMenu/get/order/most/' + localStorage.getItem('customerEmail');
+    let url = 'https://localhost:5001/MainMenu/get/order/most/' + localStorage.getItem('customerId');
     fetch(url)
     .then(response => response.json())
     .then(result => {
         document.querySelectorAll('#customerorderlist tbody tr').forEach(element => element.remove());
         let table = document.querySelector('#customerorderlist tbody');
-        for(let i = 0; i < result.orders.length; ++i)
+        for(let i = 0; i < result.length; ++i)
         {
-            if(result.orders[i].complete == true){
             
-                let row = table.insertRow(table.rows.length);
+            let row = table.insertRow(table.rows.length);
 
-                let rnCell = row.insertCell(0);
-                rnCell.innerHTML = result.orders[i].id;
+            let rnCell = row.insertCell(0);
+            rnCell.innerHTML = result[i].id;
 
-                let aCell = row.insertCell(1);
-                aCell.innerHTML = result.orders[i].totalPrice;
+            let aCell = row.insertCell(1);
+            aCell.innerHTML = result[i].totalPrice;
 
-            }
+            
         }
         
     });

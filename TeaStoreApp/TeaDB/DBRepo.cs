@@ -37,7 +37,31 @@ namespace TeaDB
             );
         }
 
-      
+        public List<OrderModel> GetCustomerOrderLeastToMost(int id)
+        {
+            return mapper.ParseOrder(
+                context.Orders
+                .Where(o => o.Customerid == id && o.Payed == true)
+                .OrderBy(o=> o.Totalprice)
+                .Include("Orderitems")
+                .ToList()
+            );
+        }
+
+
+        public List<OrderModel> GetCustomerOrderMostToLeast(int id)
+        {
+            return mapper.ParseOrder(
+                context.Orders
+                .Where(o => o.Customerid == id && o.Payed == true)
+                .OrderByDescending(o => o.Totalprice)
+                .Include("Orderitems")
+                .ToList()
+            );
+        }
+
+
+
         public void ReplenishStock(InventoryModel inventory, int amount)
         {
             context.Inventory.First(i => i.Locationid == inventory.locationId && i.Productid == inventory.productId).Stock += amount;
@@ -167,9 +191,9 @@ namespace TeaDB
             context.SaveChanges();
         }
 
-        public void DecreaseStock(InventoryModel inventory, int amount)
+        public void DecreaseStock(InventoryModel inventory)
         {
-            context.Inventory.First(i => i.Equals(inventory)).Stock -= amount;
+            context.Inventory.First(i => i.Locationid == inventory.locationId && i.Productid == inventory.productId).Stock -= inventory.stock;
             context.SaveChanges();
         }
 

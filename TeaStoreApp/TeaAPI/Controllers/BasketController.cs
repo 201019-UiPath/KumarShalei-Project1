@@ -104,12 +104,12 @@ namespace TeaAPI.Controllers
         [HttpPut("put/stock")]
         [Produces("application/json")]
         [Consumes("application/json")]
-        public IActionResult DecreaseStock(InventoryModel location, int amount)
+        public IActionResult DecreaseStock(InventoryModel inventory)
         {
             try
             {
-                basketService.DecreaseStock(location,amount);
-                return CreatedAtAction("DecreaseStock", location, amount);
+                basketService.DecreaseStock(inventory);
+                return CreatedAtAction("DecreaseStock", inventory);
             }
             catch (Exception)
             {

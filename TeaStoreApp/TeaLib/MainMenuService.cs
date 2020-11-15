@@ -26,18 +26,14 @@ namespace TeaLib
             return repo.GetCustomerInfo(email);
         }
 
-        public CustomerModel GetCustomerOrderLeastToMost(string email)
+        public List<OrderModel> GetCustomerOrderLeastToMost(int id)
         {
-            CustomerModel customer = repo.GetCustomerInfo(email);
-            customer.orders.OrderBy(o => o.totalPrice);
-            return customer;
+            return repo.GetCustomerOrderLeastToMost(id);
         }
 
-        public CustomerModel GetCustomerOrderMostToLeast (string email)
+        public List<OrderModel> GetCustomerOrderMostToLeast (int id)
         {
-            CustomerModel customer = repo.GetCustomerInfo(email);
-            customer.orders.OrderByDescending(o => o.totalPrice);
-            return customer;
+            return repo.GetCustomerOrderMostToLeast(id);
         }
 
 

@@ -37,15 +37,15 @@ namespace TeaAPI.Controllers
             }
         }
 
-        [HttpGet("get/order/least/{email}")]
+        [HttpGet("get/order/least/{id}")]
         [Produces("application/json")]
         [Consumes("application/json")]
         [EnableCors("_myAllowSpecificOrigins")]
-        public IActionResult GetCustomerOrderLeastToMost(string email)
+        public IActionResult GetCustomerOrderLeastToMost( int id)
         {
             try
             {
-                return Ok(mainMenuService.GetCustomerOrderLeastToMost(email));
+                return Ok(mainMenuService.GetCustomerOrderLeastToMost(id));
             }
             catch (Exception)
             {
@@ -54,15 +54,15 @@ namespace TeaAPI.Controllers
         }
 
 
-        [HttpGet("get/order/most/{email}")]
+        [HttpGet("get/order/most/{id}")]
         [Produces("application/json")]
         [Consumes("application/json")]
         [EnableCors("_myAllowSpecificOrigins")]
-        public IActionResult GetCustomerOrderMostToLeast(string email)
+        public IActionResult GetCustomerOrderMostToLeast(int id)
         {
             try
             {
-                return Ok(mainMenuService.GetCustomerOrderMostToLeast(email));
+                return Ok(mainMenuService.GetCustomerOrderMostToLeast(id));
             }
             catch (Exception)
             {

@@ -13,7 +13,7 @@ namespace TeaDB.IRepo
         void DeleteBasket(OrderModel order);
         void DecreaseTotalPrice(OrderModel order, decimal amount);
         void PlaceOrder(OrderModel order);
-        void DecreaseStock(InventoryModel location, int amount);
+        void DecreaseStock(InventoryModel location);
         
         
     }

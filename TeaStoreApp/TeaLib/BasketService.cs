@@ -35,9 +35,9 @@ namespace TeaLib
         {
             repo.PlaceOrder(order);
         }
-        public void DecreaseStock(InventoryModel location, int amount)
+        public void DecreaseStock(InventoryModel inventory)
         {
-            repo.DecreaseStock(location, amount);
+            repo.DecreaseStock(inventory);
         }
     }
 }
