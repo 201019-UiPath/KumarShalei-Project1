@@ -57,8 +57,8 @@ function AddItem(){
     let inventory = {};
     
     inventory.locationId = parseInt(localStorage.getItem('locationId'));
-    inventory.productId = document.querySelector('#newproductid').value;
-    inventory.stock = document.querySelector('#newamount').value;
+    inventory.productId = parseInt(document.querySelector('#newproductid').value);
+    inventory.stock = parseInt(document.querySelector('#newamount').value);
     
 
     let xhr = new XMLHttpRequest();

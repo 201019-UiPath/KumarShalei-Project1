@@ -148,11 +148,27 @@ namespace TeaDB
 
         public OrderModel GetCurrentOrder(int customerId, int locationId)
         {
-            return mapper.ParseOrder(
-                context.Orders
-                .Include("Orderitems")
-                .First(o => o.Customerid == customerId && o.Locationid == locationId && o.Payed == false)
-            );
+            try
+            {
+                return mapper.ParseOrder(
+                    context.Orders
+                    .Include("Orderitems")
+                    .First(o => o.Customerid == customerId && o.Locationid == locationId && o.Payed == false)
+                );
+            } catch (Exception)
+            {
+                OrderModel order = new OrderModel()
+                {
+                    locationId = locationId,
+                    customerId = customerId
+                };
+                CreateNewBasket(order);
+                return mapper.ParseOrder(
+                    context.Orders
+                    .Include("Orderitems")
+                    .First(o => o.Customerid == customerId && o.Locationid == locationId && o.Payed == false)
+                );
+            }
         }
 
         public void AddToBasket(OrderItemModel order)

@@ -1,0 +1,482 @@
+/* css Zen Garden submission 214 - 'Verde Moderna', by Dave Shea, http://www.mezzoblue.com/ */
+/* css released under Creative Commons License - http://creativecommons.org/licenses/by-nc-sa/1.0/  */
+/* All associated graphics copyright 2013, Dave Shea */
+
+
+/* IMPORTANT */
+/* This design is not a template. You may not reproduce it elsewhere without the
+   designer's written permission. However, feel free to study the CSS and use
+   techniques you learn from it elsewhere. */
+
+
+/*
+	Verde Moderna by Dave Shea
+
+	10 Years. http://mezzoblue.com/archives/2013/05/07/10_years/
+
+
+	We've come a long way. Here it is, the first of what will hopefully be
+	many more modern designs in the CSS Zen Garden.
+
+	With this design, I've attempted to hit as many of today's front end
+	buzzwords as possible. It's a mobile-first, responsive layout that was
+	designed in the browser from start to finish. CSS3 is used liberally
+	with fallbacks where necessary.
+
+	All photos are mine, and were taken in the Japanese Garden at the
+	Huntington Botanical Garden in Southern California.
+
+
+	Other production notes:
+
+	* Vector assets are used where appropriate. The logo is an SVG file,
+	  the icons are a custom web font built with icomoon.io
+
+	* The column effect is a CSS gradient instead of a background image.
+	  By forcing a sharp transition at 66%, we can simulate columns. The way
+	  Chrome rounds gradient values causes the columns to jump unexpectedly when
+      the window is resized, which means that using an equal padding or width
+      value doesn't align the way you think it would. That forced a bit of
+      extra contortion to get the header and body columns perfectly lined up.
+
+	* Various sidebar H3s were hidden with display:none; This was a design
+	  decision. Their inclusion seemed extraneous. Same goes for HTML/CSS
+      download links at low screen sizes, presumably that screen is a phone
+      and can't download the files anyway.
+
+	* The sidebar positioning style is (necessarily) quite a mess on wider
+      windows, especially the resource list. When flexbox is a bit closer to
+      usable, maybe I'll take another crack at fixing that up.
+
+	* A more logical place for the design list to appear in the mobile
+	  version would have been up closer to the top, possibly disclosed with a
+      menu toggle of some kind. Not something that's easily doable with CSS
+      alone, if you don't want to rely on hovers.
+
+	* The medium- and low-res versions don't differ that much; I may still push
+	  the tablet layout a bit further, it doesn't quite feel right.
+
+	* Parallax scrolling isn't doable without Javascript so you won't find it
+	  in this design. I was able to use a bit of multiple background-position
+	  trickery to create a slightly more interesting scrolling effect.
+
+*/
+
+
+@import url(http://fonts.googleapis.com/css?family=Julius+Sans+One|Libre+Baskerville:400,400italic);
+
+/* base CSS */
+* {
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+html, body {
+  padding: 0;
+  margin: 0;
+}
+body {
+  color: #325050;
+  background: #fff;
+  font-family: 'Libre Baskerville', sans-serif;
+  font-size: 70%;
+}
+
+a {
+  color: #0d8ba1;
+  -webkit-transition: all 0.25s ease-out;
+  -moz-transition: all 0.25s ease-out;
+  transition: all 0.25s ease-out;
+  text-decoration: none;
+}
+  a:visited {
+    color: #1a5952;
+  }
+  a:hover, a:focus {
+    color: #0599c2;
+    text-decoration: underline;
+  }
+abbr {
+  border: none;
+  text-transform: uppercase;
+  font-size: 0.9em;
+  letter-spacing: 0.01em;
+}
+header {
+  height: 230px;
+  padding: 20px 0 70px 0;
+
+  background: #2d6360 50% 0 url(huntington.jpg) no-repeat; /* old IE fallback */
+
+  background-attachment: fixed, fixed, fixed, scroll;
+  background-image: url(contours.png), url(noise.png), url(gridlines.png), url(huntington.jpg);
+  background-position: 0 0, 0 0, -5px -25px, 0 50%;
+  background-repeat: repeat, repeat, repeat, no-repeat;
+  background-size: auto, auto, auto, cover;
+  text-align: center;
+}
+
+
+h1, h2 {
+  padding: 0 10%;
+  margin: 0;
+  color: #fff;
+  font-weight: normal;
+}
+h1 {
+  padding-top: 0;
+  padding-bottom: 5px;
+  border-bottom: none;
+  font-family: 'Julius Sans One', sans-serif;
+  font-size: 3.2em;
+  text-transform: uppercase;
+}
+h1::before {
+  display: inline-block;
+  position: relative;
+  top: 20px;
+  content: "";
+  width: 80px;
+  height: 80px;
+  margin: -20px 20px 0 0;
+  background: url(enso.svg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  opacity: 0.6;
+}
+h2 {
+  display: block;
+  padding-top: 5px;
+  padding-bottom: 30px;
+  border-top: none;
+  color: rgba(255,255,255,0.6);
+  font-size: 1.6em;
+  font-style: italic;
+}
+h2::before {
+  content: " ";
+  padding: 50px;
+}
+h3 {
+  margin: 2em 0 0 0;
+  color: #2e484c;
+  font-family: 'Julius Sans One', sans-serif;
+  font-size: 1.8em;
+  font-weight: normal;
+  text-transform: uppercase;
+}
+p {
+  margin: 0.75em 0;
+  line-height: 2;
+}
+
+
+.page-wrapper {
+  position: relative;
+}
+.summary, .preamble {
+  width: 80%;
+  margin: 0 auto;
+}
+.supporting h3, .supporting p {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.summary {
+  padding-top: 2em;
+}
+
+
+/* intro block links -- download HTML/CSS */
+.intro a, .intro a:visited {
+  position: relative;
+  display: inline-block;
+  padding: 1px 10px 1px 32px;
+  margin: -1px -10px -1px -6px;
+  -webkit-border-radius: 1px;
+  -moz-border-radius: 1px;
+  border-radius: 1px;
+
+  color: #809b7e;
+  font-family: 'Julius Sans One', sans-serif;
+  text-transform: uppercase;
+}
+.intro a:hover, .intro a:focus {
+  z-index: 2;
+  color: #fff;
+  background: #3d8a9f;
+  text-decoration: none;
+}
+
+.intro a::before {
+  display: inline-block;
+  position: absolute;
+  top: 6px;
+  left: 8px;
+  padding: 2px;
+  color: #a9b995;
+  background: #d9e1cd;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -o-border-radius: 2px;
+
+  content: "D";
+  font-size: 16px;
+  text-indent: 0;
+
+
+  /* icomoon.io defaults */
+  font-family: 'verdemoderna';
+  speak: none;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+
+  -webkit-transition: all 0.25s ease-out;
+  -moz-transition: all 0.25s ease-out;
+  transition: all 0.25s ease-out;
+}
+  .intro a:hover::before {
+    color: #fff;
+    background: #357d93;
+  }
+
+
+/* coloured cutoff */
+div.participation, div.benefits {
+  background-attachment: scroll, scroll, fixed;
+  background-color: rgba(138,188,159,0.5);
+  background-image: url(contours-opaque.png), url(gridlines-opaque.png), url(bamboo.png);
+  background-repeat: repeat, repeat, no-repeat;
+  background-size: auto, auto, cover;
+}
+/* extra padding at the cutoffs */
+div.participation {
+  padding: 3em 0;
+  margin-top: 3em;
+}
+div.benefits {
+  padding-bottom: 3em;
+  margin-bottom: 3em;
+}
+div.participation h3, div.benefits h3 {
+  margin-top: 0;
+}
+div.participation p, div.benefits p {
+  margin-bottom: 0;
+}
+
+
+/* sidebar base styles */
+.sidebar {
+  background: #edf4f0;
+}
+.sidebar h3 {
+  display: none;
+}
+.sidebar a {
+  color: #607476;
+  text-decoration: none;
+}
+  .sidebar a:hover, .sidebar a:focus {
+    color: #49968e;
+  }
+.sidebar ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  overflow: hidden;
+}
+
+
+
+
+
+
+/* main footer */
+footer {
+  clear: both;
+  padding: 3em 10%;
+  color: #fff;
+  background: #134347;
+  text-align: center;
+}
+footer a {
+  display: inline-block;
+  overflow: hidden;
+  width: 40px;
+  height: 40px;
+  padding: 40px 0 0 0;
+  margin: 0 0.5em;
+  position: relative;
+  color: rgba(255, 255, 255, 0.5);
+  -webkit-transition: color 0.25s ease-out, box-shadow 0.25s ease-out;
+  -moz-transition: color 0.25s ease-out, box-shadow 0.25s ease-out;
+  transition: color 0.25s ease-out, box-shadow 0.25s ease-out;
+}
+footer a:hover, footer a:focus {
+  color: rgba(255, 255, 255, 0.3);
+  text-decoration: none;
+}
+footer a:visited {
+  color: rgba(255, 255, 255, 0.2);
+}
+footer a::before {
+  display: block;
+  position: absolute;
+  top: 3px;
+  left: 0;
+  overflow: visible;
+  font-size: 36px;
+  text-indent: 0;
+
+  /* icomoon.io defaults */
+  font-family: 'verdemoderna';
+  speak: none;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+}
+  footer a.zen-validate-html::before {content: "5";}
+  footer a.zen-validate-html:hover::before, footer a.zen-validate-html:focus::before {content: "%";}
+  footer a.zen-validate-css::before {content: "3";}
+  footer a.zen-validate-css:hover::before, footer a.zen-validate-css:focus::before {content: "#";}
+  footer a.zen-license::before {content: "c";}
+  footer a.zen-license:hover::before, footer a.zen-license:focus::before {content: "C";}
+  footer a.zen-accessibility::before {content: "a";}
+  footer a.zen-accessibility:hover::before, footer a.zen-accessibility:focus::before {content: "A";}
+  footer a.zen-github::before {content: "g";}
+  footer a.zen-github:hover::before, footer a.zen-github:focus::before {content: "G";}
+
+
+
+
+  /* main layout blocks */
+  nav, .supporting {
+    display: inline;
+  }
+  .summary, .preamble, .supporting div, .requirements h3, .requirements p {
+    float: left;
+    clear: left;
+    width: 66%;
+    padding: 1em 5% 1em 10%;
+  }
+  .explanation h3, .explanation p,
+  .participation h3, .participation p,
+  .benefits h3, .benefits p {
+    width: 100%;
+  }
+  .summary {
+    padding-top: 3.25em;
+  }
+  .requirements h3, .requirements p {
+    margin: 0;
+    padding-bottom: 0;
+  }
+
+
+  /* coloured cutoff */
+  div.participation, div.benefits {
+    width: 100%;
+    padding-left: 10%;
+    padding-right: 38%;
+    margin: 0;
+  }
+  /* extra padding at the cutoffs */
+  div.participation, div.requirements {
+    padding-top: 4em;
+  }
+  div.explanation, div.benefits {
+    padding-bottom: 4em;
+  }
+  .requirements p:nth-child(5) {
+    padding-bottom: 4em;
+  }
+
+
+  .intro h3, .supporting h3 {
+    margin-top: 0;
+  }
+  .intro p:last-child, .supporting p:last-child {
+    margin-bottom: 0;
+  }
+
+
+  .requirements p:last-child {
+    padding-bottom: 3em;
+    padding-top: 3em;
+    box-shadow: inset 0 0 100px rgba(255, 255, 255, 0.3);
+  }
+
+
+  /* sidebar styling */
+  .design-selection, .zen-resources {
+    position: absolute;
+    top: 360px;
+    right: 0;
+    width: 33.3%;
+    padding: 0 0 20px 0;
+    margin: 0;
+    overflow: visible;
+    background: transparent;
+  }
+  .sidebar li {
+    float: none;
+    width: auto;
+    padding-left: 0;
+    padding-right: 0;
+    margin: 0 29.4% 0 14.7%; /* 0 10% 0 5% of total width */
+  }
+
+
+  /* select a design */
+  .design-selection li:first-child {
+    border-top: 0;
+  }
+  .design-selection li:hover, .design-selection li:focus {
+    background: none;
+  }
+
+  /* archives navigation */
+  .design-archives {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 310px;
+
+    background: -moz-linear-gradient(left,  rgba(255,255,255,0) 0%, rgba(255,255,255,0) 66%, rgba(0,0,0,0.2) 66%, rgba(33,84,95,0.3) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(255,255,255,0)), color-stop(66%,rgba(255,255,255,0)), color-stop(66%,rgba(33,84,95,0.3)), color-stop(100%,rgba(33,84,95,0))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(left,  rgba(255,255,255,0) 0%,rgba(255,255,255,0) 66%,rgba(33,84,95,0.3) 66%,rgba(33,84,95,0) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(left,  rgba(255,255,255,0) 0%,rgba(255,255,255,0) 66%,rgba(33,84,95,0.3) 66%,rgba(33,84,95,0) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(left,  rgba(255,255,255,0) 0%,rgba(255,255,255,0) 66%,rgba(33,84,95,0.3) 66%,rgba(33,84,95,0) 100%); /* IE10+ */
+    background: linear-gradient(to right,  rgba(255,255,255,0) 0%,rgba(255,255,255,0) 66%,rgba(33,84,95,0.3) 66%,rgba(33,84,95,0) 100%); /* W3C */
+  }
+  .design-archives nav {
+    display: block;
+    position: absolute;
+    right: 1%;
+    top: 120px;
+    width: 32%;
+  }
+  .design-archives li {
+    margin: 0;
+  }
+  .design-archives .viewall a, .design-archives a::before {
+    background: rgba(255,255,255,0.1);
+    text-decoration: none;
+  }
+
+  .design-archives .viewall a:hover, .design-archives a:hover::before {
+    background-color: rgba(255,255,255,0.2);
+  }
+
+                                                                                                               /* 1000 lines?! */
