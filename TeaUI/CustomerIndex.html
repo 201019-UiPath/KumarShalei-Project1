@@ -15,37 +15,35 @@
 </head>
 
 <body onload= "CustomerOrders()">
-    
-    <div>
+    <!-- customer can choose a location to shop at and look at past orders (sort by cost) -->
+    <div class="center">
         <h4>Which Location would you like to visit?</h4>
-    </div>
-    
     <input type="button" value="Albany" onclick="LocationId(1), location.href='LocationIndex.html';">
     <input type="button" value="Syracuse"  onclick="LocationId(2),location.href='LocationIndex.html';">
     <input type="button" value="Buffalo"  onclick="LocationId(3),location.href='LocationIndex.html';">
     <input type="button" value="SignOut" onclick="SignOut(),location.href='SignInIndex.html';">
-    <h4>Your Past Purchases</h4>
+    </div>
 
-    <div class="container">
+    <div class="container, center">
+        <h4>Your Past Purchases...</h4>
         <table class="table, center" id="customerorderlist">
             <thead>
                 <th>Location</th>
                 <th>Total Price</th>
                 <th>Items</th>
-                <!-- <th>Items</th> -->
             </thead>
             <tbody>
                 <tr>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <!-- <td></td> -->
                 </tr>
             </tbody>
         </table>
+        <input type="button" class="center" value="Least To Most" onclick="CustomerOrderLeastToMost()">
+        <input type="button"  value = "Most to Least" onclick="CustomerOrderMostToLeast()"></div>
+
     </div>
     <div>
-    <input type="button" value="Least To Most" onclick="CustomerOrderLeastToMost()">
-    <input type="button" value = "Most to Least" onclick="CustomerOrderMostToLeast()"></div>
-</body>
+    </body>
 </html>

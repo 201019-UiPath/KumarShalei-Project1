@@ -1,19 +1,9 @@
-function IncreaseStock(id, amount){
-    let stock = {};
-    stock.locationId = parseInt(localStorage.getItem('locationId'));
-    stock.productId = id;
-    stock.stock = (-1)*amount;
-
-    xhr.open("PUT", 'https://localhost:5001/Basket/put/stock', true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify(stock));
-    GetLocationInventory();
-}
-
+// Stores location id
 function LocationId(id){
     localStorage.setItem("locationId", parseInt(id));
 }
 
+// Gets location inventory
 function Inventory(){
     id = parseInt(localStorage.getItem("locationId"));
     let url = 'https://localhost:5001/Location/get/location/' + id;
@@ -27,13 +17,14 @@ function Inventory(){
             
             let row = table.insertRow(table.rows.length);
 
-            let rnCell = row.insertCell(0);
-            rnCell.innerHTML = result[i].name;
+            let idCell = row.insertCell(0);
+            idCell.innerHTML = result[i].id;
 
-            // let aCell = row.insertCell(1);
-            // aCell.innerHTML = result[i].description;
 
-            let tCell = row.insertCell(1);
+            let nameCell = row.insertCell(1);
+            nameCell.innerHTML = result[i].name;
+
+            let sCell = row.insertCell(2);
             let stock;
             for(let j = 0; j < result[i].inventory.length; ++j){
                 if(result[i].inventory[j].locationId == id){
@@ -41,9 +32,9 @@ function Inventory(){
                     
                 }
             }
-            tCell.innerHTML = stock;
+            sCell.innerHTML = stock;
 
-            let pCell = row.insertCell(2);
+            let pCell = row.insertCell(3);
             pCell.innerHTML = result[i].price;
 
            
@@ -53,6 +44,7 @@ function Inventory(){
 
 }
 
+// adds item to inventory
 function AddItem(){
     let inventory = {};
     
@@ -76,6 +68,8 @@ function AddItem(){
     xhr.send(JSON.stringify(inventory));
 }
 
+
+// Replenishes stock
 function ReplenishStock(){
     let inventory = {};
     

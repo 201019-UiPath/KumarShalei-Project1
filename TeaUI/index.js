@@ -1,13 +1,25 @@
-
+// hides buttons when registering a new custoner
 function Register() {
     document.getElementById('NewCustomer').style.display = 'block';
     document.getElementById('ReturningButton').style.display = 'none'; 
     document.getElementById('RegisterButton').style.display = 'none'; 
 }
 
+// validates email follows email pattern
+function ValidateEmail(mail) 
+{
+ if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(mail))
+  {
+    return (true)
+  }
+    alert("You have entered an invalid email address!")
+    return (false)
+}
 
+// creates a new customer
 function AddCustomer()
 {
+    if(ValidateEmail(document.querySelector('#newemail').value)){
     let customer = {};
     customer.firstName = document.querySelector('#firstName').value;
     customer.lastName = document.querySelector('#lastName').value;
@@ -17,7 +29,6 @@ function AddCustomer()
     xhr.onreadystatechange = function(){
         if(this.readyState == 4 && this.status > 199 && this.status < 300)
         {
-            alert("New Customer added!");
             document.querySelector('#firstName').value = '';
             document.querySelector('#lastName').value = '';
             document.querySelector('#newemail').value = '';
@@ -31,16 +42,20 @@ function AddCustomer()
     fetch(url)
     .then(response => response.json())
     .then(result => CustomerLocal(result));
+
+}
 }
 
-
+// hides buttons when a returning customer signs in
 function ReturningCustomer() {
     document.getElementById('ReturningCustomer').style.display = 'block';
     document.getElementById('ReturningButton').style.display = 'none'; 
     document.getElementById('RegisterButton').style.display = 'none'; 
 }
 
+// Gets customer info of returning customer
 function GetCustomerInfo(){
+    if(ValidateEmail(document.querySelector('#userEmail').value)){
     localStorage.clear();
     let email = document.querySelector('#userEmail').value;
     let url = 'https://localhost:5001/MainMenu/get/' + email;
@@ -54,24 +69,27 @@ function GetCustomerInfo(){
             CustomerLocal(result);
         }
         });
-}
+}}
 
+// stores customer email, id and checks if customer is manager, then sends to appropriate page
 function CustomerLocal(customer){
     localStorage.clear();
     localStorage.setItem("customerId", parseInt(customer.id));
     localStorage.setItem("customerEmail", customer.email);
     if(customer.id == 1){
-        window.location.href = "ManagerIndex.html";
+        window.location.href = "ManagerProduct.html";
     }
     else {
         window.location.href = "CustomerIndex.html";
     }
 }
 
+// stores location id
 function LocationId(id){
     localStorage.setItem("locationId", parseInt(id));
 }
 
+// retrieves location inventory
 function GetLocationInventory(){
     GetOrderId();
     id = parseInt(localStorage.getItem("locationId"));
@@ -119,6 +137,7 @@ function GetLocationInventory(){
     });
 }
 
+// adds an item to basket, reduces stock and updates total price of the order
 function AddtoBasket(productid, i){
 
     let item = {};
@@ -128,9 +147,11 @@ function AddtoBasket(productid, i){
     item.totalPrice = i;
 
     let xhr = new XMLHttpRequest();
-    if(this.readyState == 4 && this.status > 199 && this.status < 300) {
-        alert('Added to Basket')
-    }
+    xhr.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status > 199 && this.status < 300) {
+            //alert('Added to Basket');
+        }}
+    ;
     xhr.open("POST", 'https://localhost:5001/Location/add/basketitem', false);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(item));
@@ -139,7 +160,7 @@ function AddtoBasket(productid, i){
     order.id = parseInt(localStorage.getItem('orderId'));
     order.customerId = parseInt(localStorage.getItem('customerId')); 
     order.locationId = parseInt(localStorage.getItem('locationId'));  
-    order.totalPrice = parseFloat(localStorage.getItem('orderTotalPrice')) + i;
+    order.totalPrice = i;
 
     
     xhr.open("PUT", 'https://localhost:5001/Location/edit/totalprice', false);
@@ -179,6 +200,7 @@ function AddtoBasket(productid, i){
 // }
 
 
+// retreives order id (repo method will create a basket if none is found)
 function GetOrderId(){
     let locationid = localStorage.getItem('locationId');
     let customerid = localStorage.getItem('customerId');
@@ -218,9 +240,8 @@ function GetOrderId(){
    
 }
 
-
+// View items in basket
 function ViewBasketItem(){
-    GetOrderId();
     let locationid = localStorage.getItem('locationId');
     let customerid = localStorage.getItem('customerId');
     let url = 'https://localhost:5001/Location/get/order/' + locationid + '/' + customerid;
@@ -234,13 +255,12 @@ function ViewBasketItem(){
             
             let row = table.insertRow(table.rows.length);
 
-            let rnCell = row.insertCell(0);
-            rnCell.innerHTML = result.orderItems[i].productId;
+            let nCell = row.insertCell(0);
+            nCell.innerHTML =  fetch('https://localhost:5001/Location/get/product/' + result.orderItems[i].productId)
+                .then(r => r.json())
+                .then(r => nCell.innerHTML =r.name);
 
-            let aCell = row.insertCell(1);
-            aCell.innerHTML = result.orderItems[i].amount;
-
-            let pCell = row.insertCell(2);
+            let pCell = row.insertCell(1);
             pCell.innerHTML = result.orderItems[i].totalPrice;
         }
         
@@ -250,6 +270,7 @@ function ViewBasketItem(){
 }
 
 
+// places order
 function PlaceOrder(){
 
     let order = {};
@@ -258,16 +279,18 @@ function PlaceOrder(){
 
 
     let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function(){
     if(this.readyState == 4 && this.status > 199 && this.status < 300) {
-        alert('Order Placed!')
-    }
+        alert('Order Placed!');
+    }};
     xhr.open("PUT", 'https://localhost:5001/Basket/put/basketorder/', false);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(order));
-
+    localStorage.removeItem('orderTotalPrice');
+    ViewBasketItem()
 }
 
-
+// Grab customer order history
 function CustomerOrders(){
     let url = 'https://localhost:5001/MainMenu/get/orders/' + localStorage.getItem('customerId');
     fetch(url)
@@ -279,27 +302,28 @@ function CustomerOrders(){
         {
             let row = table.insertRow(table.rows.length);
 
-            let rnCell = row.insertCell(0);
+            let locCell = row.insertCell(0);
             let location;
             if(result[i].locationId == 1) {location = "Albany";}
             if(result[i].locationId == 2) {location = "Syracuse";}
             if(result[i].locationId == 3) {location = "Buffalo";}
-            rnCell.innerHTML = location;
+            locCell.innerHTML = location;
 
-            let aCell = row.insertCell(1);
-            aCell.innerHTML = result[i].totalPrice;
+            let pCell = row.insertCell(1);
+            pCell.innerHTML = result[i].totalPrice;
 
-            let hCell = row.insertCell(2);
+            let productCell = row.insertCell(2);
             for (let j = 0; j < result[i].orderItems.length; ++j){
                 fetch('https://localhost:5001/Location/get/product/' + result[i].orderItems[j].productId)
                 .then(result => result.json())
-                .then(result => hCell.innerHTML += result.name + " - " + result.price + ", ");
+                .then(result => productCell.innerHTML += result.name + " - " + result.price + ", ");
             }
         }
         
     });
 }
 
+// Grab customer order history from least to most expensive
 function CustomerOrderLeastToMost(){
     let url = 'https://localhost:5001/MainMenu/get/order/least/' + localStorage.getItem('customerId');
     fetch(url)
@@ -311,27 +335,28 @@ function CustomerOrderLeastToMost(){
         {
             let row = table.insertRow(table.rows.length);
 
-            let rnCell = row.insertCell(0);
+            let locCell = row.insertCell(0);
             let location;
             if(result[i].locationId == 1) {location = "Albany";}
             if(result[i].locationId == 2) {location = "Syracuse";}
             if(result[i].locationId == 3) {location = "Buffalo";}
-            rnCell.innerHTML = location;
+            locCell.innerHTML = location;
 
-            let aCell = row.insertCell(1);
-            aCell.innerHTML = result[i].totalPrice;
+            let pCell = row.insertCell(1);
+            pCell.innerHTML = result[i].totalPrice;
 
-            let hCell = row.insertCell(2);
+            let productCell = row.insertCell(2);
             for (let j = 0; j < result[i].orderItems.length; ++j){
                 fetch('https://localhost:5001/Location/get/product/' + result[i].orderItems[j].productId)
                 .then(result => result.json())
-                .then(result => hCell.innerHTML += result.name + " - " + result.price + ", ");
+                .then(result => productCell.innerHTML += result.name + " - " + result.price + ", ");
             }
         }
         
     });
 }
 
+// Grab customer order history from most to least expensive
 function CustomerOrderMostToLeast(){
     let url = 'https://localhost:5001/MainMenu/get/order/most/' + localStorage.getItem('customerId');
     fetch(url)

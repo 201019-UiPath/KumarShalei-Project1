@@ -1,3 +1,4 @@
+// Gets location Order history
 function GetLocationOrders(id){
     localStorage.setItem("locationId", parseInt(id));
     let url = 'https://localhost:5001/Manager/get/locationorder/' + id;
@@ -11,20 +12,20 @@ function GetLocationOrders(id){
             
             let row = table.insertRow(table.rows.length);
 
-            let rnCell = row.insertCell(0);
-            rnCell.innerHTML = result[i].id;
+            let idCell = row.insertCell(0);
+            idCell.innerHTML = result[i].id;
 
-            let aCell = row.insertCell(1);
-            aCell.innerHTML = result[i].customerId;
+            let cusCell = row.insertCell(1);
+            cusCell.innerHTML = result[i].customerId;
 
             let pCell = row.insertCell(2);
             pCell.innerHTML = result[i].totalPrice;
 
-            let hCell = row.insertCell(3);
+            let nameCell = row.insertCell(3);
             for (let j = 0; j < result[i].orderItems.length; ++j){
                 fetch('https://localhost:5001/Location/get/product/' + result[i].orderItems[j].productId)
                 .then(result => result.json())
-                .then(result => hCell.innerHTML += result.name + " ");
+                .then(result => nameCell.innerHTML += result.name + ", ");
             }
         }
         
@@ -32,7 +33,7 @@ function GetLocationOrders(id){
 
 }
 
-
+// Gets location Order history from least to most expensive
 function LeastToMost(){
     let url = 'https://localhost:5001/Manager/get/locationorder/most/' + localStorage.getItem("locationId");
     fetch(url)
@@ -45,20 +46,20 @@ function LeastToMost(){
             
             let row = table.insertRow(table.rows.length);
 
-            let rnCell = row.insertCell(0);
-            rnCell.innerHTML = result[i].id;
+            let idCell = row.insertCell(0);
+            idCell.innerHTML = result[i].id;
 
-            let aCell = row.insertCell(1);
-            aCell.innerHTML = result[i].customerId;
+            let cusCell = row.insertCell(1);
+            cusCell.innerHTML = result[i].customerId;
 
             let pCell = row.insertCell(2);
             pCell.innerHTML = result[i].totalPrice;
 
-            let hCell = row.insertCell(3);
+            let nameCell = row.insertCell(3);
             for (let j = 0; j < result[i].orderItems.length; ++j){
                 fetch('https://localhost:5001/Location/get/product/' + result[i].orderItems[j].productId)
                 .then(result => result.json())
-                .then(result => hCell.innerHTML += result.name + " ");
+                .then(result => nameCell.innerHTML += result.name + ", ");
             }
         }
         
@@ -67,7 +68,7 @@ function LeastToMost(){
     
 }
 
-
+// Gets location Order history from most to least expensive
 function MostToLeast(){
     let url = 'https://localhost:5001/Manager/get/locationorder/least/' + localStorage.getItem("locationId");
     fetch(url)
@@ -80,15 +81,21 @@ function MostToLeast(){
             
             let row = table.insertRow(table.rows.length);
 
-            let rnCell = row.insertCell(0);
-            rnCell.innerHTML = result[i].id;
+            let idCell = row.insertCell(0);
+            idCell.innerHTML = result[i].id;
 
-            let aCell = row.insertCell(1);
-            aCell.innerHTML = result[i].customerId;
+            let cusCell = row.insertCell(1);
+            cusCell.innerHTML = result[i].customerId;
 
             let pCell = row.insertCell(2);
             pCell.innerHTML = result[i].totalPrice;
 
+            let nameCell = row.insertCell(3);
+            for (let j = 0; j < result[i].orderItems.length; ++j){
+                fetch('https://localhost:5001/Location/get/product/' + result[i].orderItems[j].productId)
+                .then(result => result.json())
+                .then(result => nameCell.innerHTML += result.name + ", ");
+            }
             
         }
         

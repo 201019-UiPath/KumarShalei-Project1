@@ -1,5 +1,5 @@
+// Shows all products
 function GetAllProducts(){
-
     let url = 'https://localhost:5001/Manager/get/products';
     fetch(url)
     .then(response => response.json())
@@ -11,31 +11,32 @@ function GetAllProducts(){
             
             let row = table.insertRow(table.rows.length);
 
-            let rnCell = row.insertCell(0);
-            rnCell.innerHTML = result[i].id;
+            let idCell = row.insertCell(0);
+            idCell.innerHTML = result[i].id;
 
-            let aCell = row.insertCell(1);
-            aCell.innerHTML = result[i].name;
+            let nameCell = row.insertCell(1);
+            nameCell.innerHTML = result[i].name;
 
-            let tCell = row.insertCell(2);
-            tCell.innerHTML = result[i].description;
+            let desCell = row.insertCell(2);
+            desCell.innerHTML = result[i].description;
 
             let pCell = row.insertCell(3);
             pCell.innerHTML = result[i].price;
 
-            let hCell = row.insertCell(4);
-            hCell.innerHTML = result[i].numberOfTeaBags;
+            let nCell = row.insertCell(4);
+            nCell.innerHTML = result[i].numberOfTeaBags;
         }
         
     });
 }
 
+// Creates a new product
 function NewProduct(){
     let product = {};
-    product.names = document.querySelector('#name').value;
+    product.name = document.querySelector('#name').value;
     product.description = document.querySelector('#description').value;
-    product.numberOfTeaBags = document.querySelector('#numberofteabags').value;
-    product.price = document.querySelector('#price').value;
+    product.numberOfTeaBags = parseInt(document.querySelector('#numberofteabags').value);
+    product.price = parseFloat(document.querySelector('#price').value);
 
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function(){

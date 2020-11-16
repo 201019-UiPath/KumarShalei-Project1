@@ -4,29 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="style.css">
-    
     <script src="ManagerInventoryIndex.js"></script>
     <script src="SignOut.js"></script>
+    <style>
+        .center {
+        margin-left: 10%;
+        margin-right: 10%;
+        }
+    </style>
 </head>
 <body>
+    <!-- Manager can look at inventory, replenish stock and add a product to inventory -->
     <div class="topnav">
-        <a class="active" href="ManagerIndex.html">While Youve Been gone</a>
+        <a class="active" href="ManagerProduct.html">Product</a>
         <a href="ManagerInventoryIndex.html">Inventory</a>
-        <a href="ManagerProduct.html">Product</a>
         <a href="ManagerOrderHistory.html">OrderHistory</a>
-        <input type="button" value="SignOut" onclick="SignOut(),location.href='SignInIndex.html';">
+        <a href='SignInIndex.html' onclick="SignOut()" >Sign Out</a>
     </div>
-
+    <br><br>
+    <div class="center" style="margin-top: 5%;">
+        <h3>Choose a location</h3>
+        <br>
     <input type="button" value="Albany"  onclick="LocationId(1), Inventory();">
     <input type="button" value="Syracuse"  onclick="LocationId(2),Inventory();">
     <input type="button" value="Buffalo"  onclick="LocationId(3),Inventory();">
-    
-
-    <div class="container">
+    </div>
+    <br>
+    <div class="container, center">
         <table class="table" id="inventory">
             <thead>
+                <th>Id</th>
                 <th>Product</th>
                 <th>Stock</th>
                 <th>Price</th>
@@ -36,36 +44,37 @@
                     <td></td>
                     <td></td>
                     <td></td>
+                    <td></td>
     
                 </tr>
             </tbody>
         </table>
     </div>
-
-    <div class="container">
+    <br><br>
+    <div class="container, center">
         <form action="">
             <div class="form-group">
                 <label for="productid">Product ID</label>
                 <input type="text" class="form-control" id='productid' placeholder="Enter Product ID">
-            </div>
-            <div class="form-group">
+            
                 <label for="amount">Amount:</label>
                 <input type="text" class="form-control" id='amount' placeholder="Enter Amount">
             </div>
+            <br>
             <input type="button" value="Replenish Stock" onclick="ReplenishStock()">
         </form>
     </div>
-
-    <div class="container">
+    <br>
+    <div class="container, center" style="margin-bottom: 5%;">
         <form action="">
             <div class="form-group">
                 <label for="newproductid">Product ID</label>
                 <input type="text" class="form-control" id='newproductid' placeholder="Enter Product ID">
-            </div>
-            <div class="form-group">
+            
                 <label for="newamount">Amount:</label>
                 <input type="text" class="form-control" id='newamount' placeholder="Enter Amount">
             </div>
+            <br>
             <input type="button" value="Add to Inventory"  onclick="AddItem()">
         </form>
     </div>
