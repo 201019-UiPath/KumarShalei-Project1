@@ -42,6 +42,7 @@ Right Click inside the folder you wish to save the project and click 'Git Bash H
 Run the following git commands in order to download project onto your machine:
 * git clone https://github.com/201019-UiPath/KumarShalei-Project1.git
 
+### Usage
 Navigate to the TeaStoreApp folder and click TeaStoreApp.sln
 This will open the API project in Visual Studio 2019.
 
@@ -52,6 +53,5 @@ This creates the connection between our Database and UI
 
 Back in the File Explorer, navigate to outside our the TeaStoreApp folder, and click on the TeaUI folder. Here click on SignInIndex.html. You will be met with the log in screen for the store application!
 
-
-#### License
-This project uses the following license: <MIT License>.
+### License
+This project uses the following license: MIT License.
